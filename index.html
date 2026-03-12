@@ -1,687 +1,114 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-  <title>CNC programiranje i optimizacija obrade | Magic Code CNC</title>
-  <meta name="description" content="CNC programiranje, optimizacija obrade i izrada visokotočnih CNC pozicija za proizvodnju i obradu metala.">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magic Code CNC</title>
-  <meta name="description" content="CNC programiranje, optimizacija obrade, izrada visokotočnih pozicija i tehnička podrška za preciznu proizvodnju." />
+  <title>CNC programiranje i optimizacija obrade | Magic Code CNC</title>
+  <meta name="description" content="Magic Code CNC nudi CNC programiranje, optimizaciju obrade, visokotočne pozicije i tehničku podršku za preciznu proizvodnju u Hrvatskoj." />
+  <meta name="keywords" content="CNC programiranje, CNC obrada, CNC programer Hrvatska, optimizacija CNC obrade, visokotočne pozicije, precizna proizvodnja, CNC usluge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Magic Code CNC" />
+  <link rel="canonical" href="https://magiccodecnc.hr/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CNC programiranje i optimizacija obrade | Magic Code CNC" />
+  <meta property="og:description" content="CNC programiranje, optimizacija obrade i visokotočne pozicije za proizvodnju i obradu metala." />
+  <meta property="og:url" content="https://magiccodecnc.hr/" />
+  <meta property="og:site_name" content="Magic Code CNC" />
   <style>
-    :root{
-      --bg:#0b0e13;
-      --bg-2:#11161f;
-      --card:#151b25cc;
-      --card-solid:#151b25;
-      --line:#2a3443;
-      --text:#eef3f8;
-      --muted:#aeb8c7;
-      --gold:#d8a72f;
-      --gold-2:#f0ca6b;
-      --green:#25D366;
-      --max:1180px;
-      --radius:22px;
-      --shadow:0 18px 50px rgba(0,0,0,.30);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      line-height:1.6;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(216,167,47,.18), transparent 26%),
-        radial-gradient(circle at 100% 20%, rgba(37,211,102,.08), transparent 20%),
-        linear-gradient(180deg, #090c11 0%, #0d1118 35%, #0c1016 100%);
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:36px 36px;
-      mask-image:linear-gradient(180deg, rgba(0,0,0,.5), transparent 70%);
-      opacity:.18;
-    }
-
-    a{text-decoration:none;color:inherit}
-    .wrap{width:min(100% - 32px, var(--max)); margin:0 auto}
-
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(14px);
-      background:rgba(10,13,18,.78);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .nav-inner{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-    }
-
-    .logo{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      font-weight:900;
-      color:#111;
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      box-shadow:0 12px 32px rgba(216,167,47,.30);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .logo::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg, rgba(255,255,255,.45), transparent 45%);
-    }
-
-    .menu{
-      display:flex;
-      gap:22px;
-      color:var(--muted);
-      font-size:15px;
-    }
-
-    .menu a:hover{color:var(--text)}
-
-    .btn, .btn-outline, .btn-whatsapp{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:48px;
-      padding:0 20px;
-      border-radius:999px;
-      font-weight:800;
-      transition:.18s ease;
-    }
-
-    .btn{
-      color:#111;
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      box-shadow:0 12px 28px rgba(216,167,47,.25);
-    }
-
-    .btn-outline{
-      color:var(--text);
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
-    }
-
-    .btn-whatsapp{
-      color:#08120c;
-      background:linear-gradient(135deg, #37e178, var(--green));
-      box-shadow:0 12px 28px rgba(37,211,102,.22);
-    }
-
-    .btn:hover, .btn-outline:hover, .btn-whatsapp:hover{
-      transform:translateY(-1px);
-    }
-
-    .hero{
-      position:relative;
-      padding:78px 0 52px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:30px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:16px;
-      color:var(--gold-2);
-      text-transform:uppercase;
-      font-size:13px;
-      letter-spacing:.18em;
-    }
-
-    .eyebrow::before{
-      content:"";
-      width:36px;
-      height:1px;
-      background:linear-gradient(90deg, var(--gold), transparent);
-    }
-
-    h1{
-      margin:0 0 18px;
-      font-size:clamp(42px, 6vw, 72px);
-      line-height:1.02;
-      letter-spacing:-.04em;
-      max-width:760px;
-    }
-
-    .lead{
-      max-width:720px;
-      color:var(--muted);
-      font-size:clamp(17px,2.1vw,20px);
-      margin:0 0 30px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:28px;
-    }
-
-    .hero-points{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px 24px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .hero-points span::before{
-      content:"✓";
-      color:var(--gold-2);
-      font-weight:900;
-      margin-right:8px;
-    }
-
-    .visual-panel{
-      position:relative;
-      min-height:520px;
-      border-radius:28px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        radial-gradient(circle at 20% 20%, rgba(216,167,47,.12), transparent 28%),
-        linear-gradient(180deg, #131924 0%, #10151d 100%);
-      box-shadow:var(--shadow);
-    }
-
-    .machine-glow{
-      position:absolute;
-      inset:auto -80px -90px auto;
-      width:260px;
-      height:260px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(216,167,47,.18), transparent 70%);
-    }
-
-    .machine{
-      position:absolute;
-      inset:22px;
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.08);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
-        linear-gradient(135deg, #131922 0%, #0d1118 100%);
-      overflow:hidden;
-    }
-
-    .machine-top{
-      position:absolute;
-      inset:0 0 auto 0;
-      height:58px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:0 18px;
-      border-bottom:1px solid rgba(255,255,255,.07);
-      background:rgba(255,255,255,.03);
-    }
-
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.18);
-    }
-
-    .machine-screen{
-      position:absolute;
-      left:28px;
-      top:90px;
-      width:42%;
-      height:170px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(180deg, rgba(24,34,47,.92), rgba(9,15,22,.96)),
-        radial-gradient(circle at 70% 20%, rgba(37,211,102,.12), transparent 20%);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
-      padding:18px;
-    }
-
-    .screen-line{
-      height:10px;
-      border-radius:999px;
-      margin-bottom:12px;
-      background:linear-gradient(90deg, rgba(240,202,107,.85), rgba(240,202,107,.16));
-    }
-
-    .screen-line.small{width:58%}
-    .screen-line.mid{width:78%}
-    .screen-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-top:18px;
-    }
-
-    .screen-cell{
-      height:48px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .screen-cell::after{
-      content:"";
-      position:absolute;
-      inset:auto 0 0 0;
-      height:2px;
-      background:linear-gradient(90deg, transparent, rgba(37,211,102,.8), transparent);
-    }
-
-    .arm{
-      position:absolute;
-      right:38px;
-      top:100px;
-      width:168px;
-      height:250px;
-    }
-
-    .arm-head{
-      position:absolute;
-      right:30px;
-      top:0;
-      width:92px;
-      height:42px;
-      border-radius:16px;
-      background:linear-gradient(180deg, #2a3342, #161d28);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 12px 22px rgba(0,0,0,.24);
-    }
-
-    .arm-head::after{
-      content:"";
-      position:absolute;
-      left:16px;
-      right:16px;
-      bottom:8px;
-      height:4px;
-      border-radius:999px;
-      background:linear-gradient(90deg, rgba(240,202,107,.9), rgba(240,202,107,.2));
-    }
-
-    .arm-body{
-      position:absolute;
-      right:64px;
-      top:38px;
-      width:24px;
-      height:164px;
-      border-radius:14px;
-      background:linear-gradient(180deg, #303a49, #151b25);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .arm-tool{
-      position:absolute;
-      right:45px;
-      top:194px;
-      width:62px;
-      height:34px;
-      border-radius:12px;
-      background:linear-gradient(180deg, #323c4d, #18202b);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .arm-tool::after{
-      content:"";
-      position:absolute;
-      left:27px;
-      top:33px;
-      width:8px;
-      height:72px;
-      border-radius:999px;
-      background:linear-gradient(180deg, #f0ca6b, #7e5a0a);
-      box-shadow:0 0 18px rgba(240,202,107,.18);
-    }
-
-    .workpiece{
-      position:absolute;
-      left:42%;
-      right:38px;
-      bottom:46px;
-      height:110px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.09);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)),
-        repeating-linear-gradient(
-          90deg,
-          rgba(240,202,107,.08) 0 14px,
-          rgba(255,255,255,.03) 14px 28px
-        ),
-        linear-gradient(180deg, #1c2330, #121821);
-      overflow:hidden;
-    }
-
-    .workpiece::before{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      top:26px;
-      height:1px;
-      background:rgba(255,255,255,.08);
-    }
-
-    .workpiece::after{
-      content:"";
-      position:absolute;
-      left:22px;
-      top:42px;
-      width:90px;
-      height:40px;
-      border-radius:10px;
-      border:1px solid rgba(240,202,107,.28);
-      background:rgba(240,202,107,.06);
-    }
-
-    .badge-row{
-      position:absolute;
-      left:22px;
-      right:22px;
-      bottom:22px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .mini{
-      padding:14px 14px;
-      border-radius:16px;
-      background:rgba(11,16,24,.72);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .mini small{
-      display:block;
-      color:var(--muted);
-      margin-bottom:4px;
-      font-size:12px;
-    }
-
-    .mini strong{font-size:16px}
-
-    section{padding:48px 0}
-    .section-head{
-      max-width:760px;
-      margin-bottom:26px;
-    }
-
-    .section-head h2{
-      margin:0 0 10px;
-      font-size:clamp(30px,4vw,44px);
-      line-height:1.08;
-      letter-spacing:-.03em;
-    }
-
-    .section-head p{
-      margin:0;
-      color:var(--muted);
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      padding:24px;
-      box-shadow:var(--shadow);
-    }
-
-    .icon{
-      width:48px;
-      height:48px;
-      border-radius:15px;
-      display:grid;
-      place-items:center;
-      margin-bottom:14px;
-      background:rgba(216,167,47,.11);
-      border:1px solid rgba(216,167,47,.24);
-      font-size:23px;
-    }
-
-    .card h3{
-      margin:0 0 10px;
-      font-size:20px;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-    }
-
-    .process{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-    }
-
-    .step{
-      position:relative;
-      overflow:hidden;
-    }
-
-    .step::after{
-      content:"";
-      position:absolute;
-      right:-20px;
-      top:-20px;
-      width:100px;
-      height:100px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(216,167,47,.12), transparent 70%);
-    }
-
-    .step-num{
-      width:36px;
-      height:36px;
-      display:grid;
-      place-items:center;
-      border-radius:999px;
-      background:linear-gradient(135deg, var(--gold), var(--gold-2));
-      color:#111;
-      font-weight:900;
-      margin-bottom:14px;
-    }
-
-    .about{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:22px;
-    }
-
-    .stat-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:14px;
-      margin-top:18px;
-    }
-
-    .stat{
-      border-radius:16px;
-      padding:18px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .stat strong{
-      display:block;
-      font-size:28px;
-      margin-bottom:4px;
-      color:var(--gold-2);
-    }
-
-    .contact{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:22px;
-      align-items:start;
-    }
-
-    .contact-list{
-      display:grid;
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .contact-item{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:15px 16px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .contact-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .form{
-      display:grid;
-      gap:14px;
-    }
-
-    .input, textarea{
-      width:100%;
-      padding:14px 15px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.035);
-      color:var(--text);
-      outline:none;
-      font:inherit;
-    }
-
-    .input:focus, textarea:focus{
-      border-color:rgba(240,202,107,.38);
-      box-shadow:0 0 0 3px rgba(240,202,107,.08);
-    }
-
-    textarea{
-      resize:vertical;
-      min-height:138px;
-    }
-
-    .file-note{
-      color:var(--muted);
-      font-size:14px;
-      margin-top:-2px;
-    }
-
-    .footer{
-      padding:28px 0 56px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .footer-box{
-      border-top:1px solid rgba(255,255,255,.08);
-      padding-top:22px;
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .floating-wa{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:60;
-      width:60px;
-      height:60px;
-      border-radius:999px;
-      display:grid;
-      place-items:center;
-      color:#08120c;
-      background:linear-gradient(135deg, #37e178, var(--green));
-      box-shadow:0 18px 35px rgba(37,211,102,.28);
-      font-size:28px;
-    }
-
-    @media (max-width: 980px){
-      .hero-grid, .grid-3, .about, .contact, .process{
-        grid-template-columns:1fr;
-      }
-      .visual-panel{
-        min-height:460px;
-      }
-    }
-
-    @media (max-width: 760px){
-      .menu{display:none}
-      .hero{padding-top:42px}
-      .nav-inner{min-height:66px}
-      .badge-row{grid-template-columns:1fr}
-      .stat-grid{grid-template-columns:1fr}
-      .machine-screen{width:calc(100% - 56px); height:140px}
-      .arm{right:20px; top:248px; transform:scale(.9)}
-      .workpiece{left:22px; right:22px; bottom:90px}
-    }
+    :root{--bg:#090d12;--bg2:#101722;--card:rgba(18,24,34,.82);--text:#edf3fa;--muted:#a9b5c7;--gold:#d9a72a;--gold2:#f0cb72;--green:#25D366;--green2:#44e283;--max:1180px;--radius:24px;--shadow:0 20px 60px rgba(0,0,0,.32)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6;background:radial-gradient(circle at 0% 0%, rgba(217,167,42,.16), transparent 26%),radial-gradient(circle at 100% 20%, rgba(37,211,102,.08), transparent 20%),linear-gradient(180deg,#080b10 0%,#0b1017 38%,#0d1219 100%);overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 72%);opacity:.18}
+    a{color:inherit;text-decoration:none}.wrap{width:min(100% - 32px, var(--max));margin:0 auto}
+    .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(8,12,18,.76);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}
+    .logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 12px 32px rgba(217,167,42,.28);position:relative;overflow:hidden}
+    .logo::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg, rgba(255,255,255,.4), transparent 48%)}
+    .menu{display:flex;gap:22px;color:var(--muted);font-size:15px}.menu a:hover{color:var(--text)}
+    .btn,.btn-outline,.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 20px;border-radius:999px;font-weight:800;transition:.18s ease}
+    .btn{color:#111;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 12px 28px rgba(217,167,42,.24)}
+    .btn-outline{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text)}
+    .btn-wa{color:#08120c;background:linear-gradient(135deg,var(--green2),var(--green));box-shadow:0 12px 28px rgba(37,211,102,.22)}
+    .btn:hover,.btn-outline:hover,.btn-wa:hover{transform:translateY(-1px)}
+    .hero{padding:82px 0 56px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:32px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;color:var(--gold2);text-transform:uppercase;font-size:13px;letter-spacing:.18em}
+    .eyebrow::before{content:"";width:38px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h1{margin:0 0 18px;font-size:clamp(42px,6vw,74px);line-height:1.01;letter-spacing:-.045em;max-width:780px}
+    .lead{margin:0 0 30px;max-width:760px;color:var(--muted);font-size:clamp(17px,2.1vw,20px)}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+    .hero-points{display:flex;flex-wrap:wrap;gap:14px 22px;color:var(--muted);font-size:14px}
+    .hero-points span::before{content:"✓";color:var(--gold2);font-weight:900;margin-right:8px}
+    .visual-panel{position:relative;min-height:560px;border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),radial-gradient(circle at 20% 20%, rgba(217,167,42,.12), transparent 28%),linear-gradient(180deg,#131a25 0%,#0f141d 100%)}
+    .machine-glow{position:absolute;right:-90px;bottom:-100px;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle, rgba(217,167,42,.2), transparent 70%)}
+    .machine{position:absolute;inset:22px;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012)),linear-gradient(135deg, #131922 0%, #0b1017 100%)}
+    .machine-top{position:absolute;inset:0 0 auto 0;height:58px;display:flex;align-items:center;gap:8px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.18)}
+    .machine-screen{position:absolute;left:28px;top:90px;width:43%;height:176px;border-radius:18px;border:1px solid rgba(255,255,255,.1);padding:18px;background:linear-gradient(180deg, rgba(22,34,47,.92), rgba(8,14,21,.97)),radial-gradient(circle at 70% 20%, rgba(37,211,102,.12), transparent 22%)}
+    .screen-line{height:10px;border-radius:999px;margin-bottom:12px;background:linear-gradient(90deg, rgba(240,203,114,.9), rgba(240,203,114,.15))}.screen-line.small{width:55%}.screen-line.mid{width:78%}
+    .screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+    .screen-cell{height:48px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .screen-cell::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg, transparent, rgba(37,211,102,.82), transparent)}
+    .arm{position:absolute;right:38px;top:98px;width:176px;height:254px}
+    .arm-head{position:absolute;right:30px;top:0;width:96px;height:44px;border-radius:16px;background:linear-gradient(180deg,#2b3545,#171e29);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 22px rgba(0,0,0,.24)}
+    .arm-head::after{content:"";position:absolute;left:16px;right:16px;bottom:8px;height:4px;border-radius:999px;background:linear-gradient(90deg, rgba(240,203,114,.92), rgba(240,203,114,.16))}
+    .arm-body{position:absolute;right:66px;top:40px;width:24px;height:166px;border-radius:14px;background:linear-gradient(180deg,#313b4a,#151c26);border:1px solid rgba(255,255,255,.08)}
+    .arm-tool{position:absolute;right:47px;top:198px;width:64px;height:34px;border-radius:12px;background:linear-gradient(180deg,#323d4e,#19212c);border:1px solid rgba(255,255,255,.08)}
+    .arm-tool::after{content:"";position:absolute;left:28px;top:33px;width:8px;height:78px;border-radius:999px;background:linear-gradient(180deg,#f0cb72,#7f5d0a);box-shadow:0 0 18px rgba(240,203,114,.18)}
+    .workpiece{position:absolute;left:42%;right:38px;bottom:46px;height:116px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),repeating-linear-gradient(90deg,rgba(240,203,114,.085) 0 14px,rgba(255,255,255,.03) 14px 28px),linear-gradient(180deg,#1d2531,#111821);overflow:hidden}
+    .workpiece::before{content:"";position:absolute;left:0;right:0;top:26px;height:1px;background:rgba(255,255,255,.08)}
+    .workpiece::after{content:"";position:absolute;left:22px;top:44px;width:92px;height:40px;border-radius:10px;border:1px solid rgba(240,203,114,.28);background:rgba(240,203,114,.06)}
+    .badge-row{position:absolute;left:22px;right:22px;bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .mini{padding:14px;border-radius:16px;background:rgba(11,16,24,.72);border:1px solid rgba(255,255,255,.08)}
+    .mini small{display:block;color:var(--muted);margin-bottom:4px;font-size:12px}.mini strong{font-size:16px}
+    section{padding:52px 0}.section-head{max-width:780px;margin-bottom:26px}.section-head h2{margin:0 0 10px;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.03em}.section-head p{margin:0;color:var(--muted)}
+    .grid-3,.seo{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.024));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+    .icon{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;margin-bottom:14px;background:rgba(217,167,42,.11);border:1px solid rgba(217,167,42,.22);font-size:24px}
+    .card h3{margin:0 0 10px;font-size:20px}.card p{margin:0;color:var(--muted)}
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .step{position:relative;overflow:hidden}.step::after{content:"";position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle, rgba(217,167,42,.12), transparent 70%)}
+    .step-num{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;font-weight:900;margin-bottom:14px}
+    .about,.contact{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .stat{border-radius:16px;padding:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+    .stat strong{display:block;font-size:28px;margin-bottom:4px;color:var(--gold2)}
+    .contact-list{display:grid;gap:12px;margin-top:18px}
+    .contact-item{display:flex;gap:12px;align-items:flex-start;padding:15px 16px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+    .contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .form{display:grid;gap:14px}
+    .input,textarea{width:100%;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:var(--text);outline:none;font:inherit}
+    .input:focus,textarea:focus{border-color:rgba(240,203,114,.38);box-shadow:0 0 0 3px rgba(240,203,114,.08)}
+    textarea{resize:vertical;min-height:140px}.file-note{color:var(--muted);font-size:14px;margin-top:-2px}
+    .footer{padding:28px 0 56px;color:var(--muted);font-size:14px}
+    .footer-box{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .floating-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:62px;height:62px;border-radius:999px;display:grid;place-items:center;color:#08120c;background:linear-gradient(135deg,var(--green2),var(--green));box-shadow:0 18px 35px rgba(37,211,102,.28);font-size:28px}
+    @media (max-width:980px){.hero-grid,.grid-3,.process,.about,.seo,.contact{grid-template-columns:1fr}.visual-panel{min-height:500px}}
+    @media (max-width:760px){.menu{display:none}.hero{padding-top:44px}.nav-inner{min-height:66px}.badge-row{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr}.machine-screen{width:calc(100% - 56px);height:144px}.arm{right:20px;top:246px;transform:scale(.9)}.workpiece{left:22px;right:22px;bottom:92px}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"Magic Code CNC",
+    "url":"https://magiccodecnc.hr/",
+    "email":"info@magiccodecnc.hr",
+    "telephone":"+385911670721",
+    "areaServed":"Hrvatska",
+    "description":"CNC programiranje, optimizacija obrade, visokotočne pozicije i tehnička podrška za preciznu proizvodnju.",
+    "sameAs":["https://wa.me/385911670721"]
+  }
+  </script>
 </head>
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top">
-        <span class="logo">MC</span>
-        <span>Magic Code CNC</span>
-      </a>
+      <a class="brand" href="#top"><span class="logo">MC</span><span>Magic Code CNC</span></a>
       <div class="menu">
         <a href="#usluge">Usluge</a>
         <a href="#proces">Proces</a>
-        <a href="#onama">O nama</a>
+        <a href="#seo">Zašto baš mi</a>
         <a href="#kontakt">Kontakt</a>
       </div>
       <a class="btn" href="#kontakt">Zatraži ponudu</a>
@@ -691,66 +118,44 @@
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">CNC programiranje • precizna obrada</div>
-        <h1>Pouzdan CNC partner za preciznu i efikasnu proizvodnju.</h1>
+        <div class="eyebrow">CNC programiranje • Hrvatska</div>
+        <h1>CNC programiranje i optimizacija obrade za preciznu proizvodnju.</h1>
         <p class="lead">
-          Izrada i optimizacija CNC programa, visokotočne pozicije i tehnička podrška za radionice
-          i proizvodnju koje traže stabilan proces, manje zastoja i bolju ponovljivost.
+          Magic Code CNC pruža CNC programiranje, optimizaciju CNC obrade, izradu visokotočnih pozicija
+          i tehničku podršku za radionice i proizvodnju koje traže preciznost, ponovljivost i bolju učinkovitost.
         </p>
         <div class="hero-actions">
           <a class="btn" href="#kontakt">Pošalji upit</a>
           <a class="btn-outline" href="#usluge">Pogledaj usluge</a>
-          <a class="btn-whatsapp" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp</a>
         </div>
         <div class="hero-points">
-          <span>Brža priprema obrade</span>
-          <span>Preciznost i ponovljivost</span>
+          <span>CNC programer Hrvatska</span>
           <span>Optimizacija vremena ciklusa</span>
+          <span>Precizna i stabilna obrada</span>
         </div>
       </div>
 
       <div class="visual-panel" aria-hidden="true">
         <div class="machine-glow"></div>
         <div class="machine">
-          <div class="machine-top">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
+          <div class="machine-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <div class="machine-screen">
             <div class="screen-line mid"></div>
             <div class="screen-line"></div>
             <div class="screen-line small"></div>
             <div class="screen-grid">
-              <div class="screen-cell"></div>
-              <div class="screen-cell"></div>
-              <div class="screen-cell"></div>
-              <div class="screen-cell"></div>
-              <div class="screen-cell"></div>
-              <div class="screen-cell"></div>
+              <div class="screen-cell"></div><div class="screen-cell"></div><div class="screen-cell"></div>
+              <div class="screen-cell"></div><div class="screen-cell"></div><div class="screen-cell"></div>
             </div>
           </div>
-          <div class="arm">
-            <div class="arm-head"></div>
-            <div class="arm-body"></div>
-            <div class="arm-tool"></div>
-          </div>
+          <div class="arm"><div class="arm-head"></div><div class="arm-body"></div><div class="arm-tool"></div></div>
           <div class="workpiece"></div>
         </div>
-
         <div class="badge-row">
-          <div class="mini">
-            <small>Fokus</small>
-            <strong>CNC programiranje</strong>
-          </div>
-          <div class="mini">
-            <small>Rezultat</small>
-            <strong>Manje grešaka i zastoja</strong>
-          </div>
-          <div class="mini">
-            <small>Prednost</small>
-            <strong>Brža i sigurnija obrada</strong>
-          </div>
+          <div class="mini"><small>Fokus</small><strong>CNC programiranje</strong></div>
+          <div class="mini"><small>Rezultat</small><strong>Manje grešaka i zastoja</strong></div>
+          <div class="mini"><small>Prednost</small><strong>Brža i sigurnija obrada</strong></div>
         </div>
       </div>
     </div>
@@ -759,24 +164,24 @@
   <section id="usluge">
     <div class="wrap">
       <div class="section-head">
-        <h2>Usluge</h2>
-        <p>Praktična rješenja za proizvodnju, od pripreme CNC programa do optimizacije obrade i podrške u stvarnom radu na stroju.</p>
+        <h2>CNC usluge</h2>
+        <p>Nudimo CNC programiranje, optimizaciju CNC obrade i pripremu visokotočnih pozicija za proizvodnju, obradu metala, precizne komponente, prototipe i serijske komade.</p>
       </div>
       <div class="grid-3">
         <article class="card">
           <div class="icon">⚙️</div>
           <h3>CNC programiranje</h3>
-          <p>Izrada novih programa za pojedinačne komade, prototipe i serijsku proizvodnju uz jasan i pouzdan proces.</p>
+          <p>Izrada novih programa za pojedinačne komade, male serije i stabilnu serijsku proizvodnju s fokusom na sigurnost i ponovljivost procesa.</p>
         </article>
         <article class="card">
           <div class="icon">📐</div>
           <h3>Visokotočne pozicije</h3>
-          <p>Precizno definiranje pozicija, referenci i logike obrade za stabilan rezultat i sigurniji rad.</p>
+          <p>Precizno definiranje nultih točaka, referenci i logike obrade za pouzdan rezultat, kontrolu tolerancija i mirniji rad na stroju.</p>
         </article>
         <article class="card">
           <div class="icon">🚀</div>
-          <h3>Optimizacija procesa</h3>
-          <p>Smanjenje vremena ciklusa, poboljšanje putanje alata i uklanjanje slabih točaka u postojećoj obradi.</p>
+          <h3>Optimizacija CNC obrade</h3>
+          <p>Analiza postojećeg procesa, smanjenje vremena ciklusa, poboljšanje putanja alata i uklanjanje uskih grla u obradi.</p>
         </article>
       </div>
     </div>
@@ -785,30 +190,14 @@
   <section id="proces">
     <div class="wrap">
       <div class="section-head">
-        <h2>Kako radimo</h2>
-        <p>Jasan redoslijed od tehničkog zahtjeva do gotovog programa spremnog za proizvodnju.</p>
+        <h2>Kako izgleda suradnja</h2>
+        <p>Jasan proces od tehničkog zahtjeva do gotovog CNC programa spremnog za proizvodnju i daljnje dorade po potrebi.</p>
       </div>
       <div class="process">
-        <article class="card step">
-          <div class="step-num">1</div>
-          <h3>Analiza</h3>
-          <p>Pregled nacrta, materijala, tolerancija i očekivane dinamike proizvodnje.</p>
-        </article>
-        <article class="card step">
-          <div class="step-num">2</div>
-          <h3>Priprema</h3>
-          <p>Definiranje strategije obrade, redoslijeda operacija i izbora alata.</p>
-        </article>
-        <article class="card step">
-          <div class="step-num">3</div>
-          <h3>Optimizacija</h3>
-          <p>Provjera učinkovitosti, sigurnosti i preciznosti prije puštanja u rad.</p>
-        </article>
-        <article class="card step">
-          <div class="step-num">4</div>
-          <h3>Podrška</h3>
-          <p>Po potrebi dorade i prilagodbe stvarnim uvjetima na stroju i u proizvodnji.</p>
-        </article>
+        <article class="card step"><div class="step-num">1</div><h3>Analiza nacrta</h3><p>Pregled nacrta, materijala, tolerancija, količine i očekivanog načina obrade.</p></article>
+        <article class="card step"><div class="step-num">2</div><h3>Priprema programa</h3><p>Definiranje strategije obrade, redoslijeda operacija, izbora alata i ključnih kontrolnih točaka.</p></article>
+        <article class="card step"><div class="step-num">3</div><h3>Optimizacija</h3><p>Provjera preciznosti, sigurnosti, stabilnosti i učinkovitosti prije puštanja u rad.</p></article>
+        <article class="card step"><div class="step-num">4</div><h3>Podrška</h3><p>Dodatne dorade i prilagodbe stvarnim uvjetima rada u proizvodnji ili na stroju.</p></article>
       </div>
     </div>
   </section>
@@ -817,33 +206,32 @@
     <div class="wrap about">
       <div class="card">
         <div class="section-head" style="margin-bottom:0">
-          <h2>O nama</h2>
-          <p>
-            Magic Code CNC fokusiran je na CNC programiranje, visokotočne pozicije i optimizaciju obrade.
-            Cilj je jednostavan: stabilan program koji radi pouzdano, precizno i učinkovito u stvarnoj proizvodnji.
-          </p>
+          <h2>Magic Code CNC</h2>
+          <p>Magic Code CNC specijaliziran je za CNC programiranje, optimizaciju obrade i izradu visokotočnih pozicija. Fokus je na praktičnim rješenjima koja donose stabilniju proizvodnju, manje zastoja i bolju kontrolu kvalitete.</p>
         </div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Zašto Magic Code CNC</h3>
+        <h3 style="margin-top:0">Zašto klijenti traže baš ovo</h3>
         <div class="stat-grid">
-          <div class="stat">
-            <strong>Preciznost</strong>
-            <span>Tolerancije i detalji pod kontrolom.</span>
-          </div>
-          <div class="stat">
-            <strong>Pouzdanost</strong>
-            <span>Jasna logika obrade bez improvizacije.</span>
-          </div>
-          <div class="stat">
-            <strong>Ušteda</strong>
-            <span>Manje zastoja i kraće vrijeme pripreme.</span>
-          </div>
-          <div class="stat">
-            <strong>Podrška</strong>
-            <span>Dorade prema stvarnim uvjetima rada.</span>
-          </div>
+          <div class="stat"><strong>Preciznost</strong><span>Tolerancije i detalji bez improvizacije.</span></div>
+          <div class="stat"><strong>Pouzdanost</strong><span>Jasna logika obrade i bolja ponovljivost.</span></div>
+          <div class="stat"><strong>Učinkovitost</strong><span>Kraće vrijeme pripreme i bolji tok proizvodnje.</span></div>
+          <div class="stat"><strong>Podrška</strong><span>Dorade prema stvarnim uvjetima rada.</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="seo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Za koga je ova usluga</h2>
+        <p>Ovaj sadržaj je namjerno napisan jasno i konkretno kako bi Google razumio da se stranica odnosi na CNC programiranje, CNC obradu, optimizaciju obrade i tehničku podršku za proizvodnju u Hrvatskoj.</p>
+      </div>
+      <div class="seo">
+        <article class="card"><h3>CNC programiranje za proizvodnju</h3><p>Ako tražiš CNC programiranje za obradu metala, precizne dijelove, prototipe ili serijsku proizvodnju, Magic Code CNC nudi praktična rješenja prilagođena stvarnoj radionici i stvarnim rokovima.</p></article>
+        <article class="card"><h3>Optimizacija CNC obrade</h3><p>Kada postojeći program radi presporo, nestabilno ili stvara nepotrebne zastoje, optimizacija CNC obrade može donijeti kraće cikluse, mirniji rad i bolju iskoristivost stroja.</p></article>
+        <article class="card"><h3>CNC programer Hrvatska</h3><p>Za upite poput “CNC programer Hrvatska”, “CNC obrada Hrvatska” ili “optimizacija CNC obrade”, stranica je strukturirana da jasno pokaže područje rada, usluge i način kontakta.</p></article>
       </div>
     </div>
   </section>
@@ -855,24 +243,13 @@
           <h2>Kontakt</h2>
           <p>Pošalji osnovne informacije o projektu i javljamo se s prijedlogom rješenja.</p>
         </div>
-
         <div class="contact-list">
-          <div class="contact-item">
-            <div>📧</div>
-            <div><strong>Email</strong><br><a href="mailto:info@magiccodecnc.hr">info@magiccodecnc.hr</a></div>
-          </div>
-          <div class="contact-item">
-            <div>📍</div>
-            <div><strong>Lokacija</strong><br>Hrvatska</div>
-          </div>
-          <div class="contact-item">
-            <div>🕒</div>
-            <div><strong>Odgovor</strong><br>U najkraćem mogućem roku</div>
-          </div>
+          <div class="contact-item"><div>📧</div><div><strong>Email</strong><br><a href="mailto:info@magiccodecnc.hr">info@magiccodecnc.hr</a></div></div>
+          <div class="contact-item"><div>📱</div><div><strong>WhatsApp</strong><br><a href="https://wa.me/385911670721" target="_blank" rel="noopener">+385 91 167 0721</a></div></div>
+          <div class="contact-item"><div>📍</div><div><strong>Područje rada</strong><br>Hrvatska</div></div>
         </div>
-
         <div class="contact-actions">
-          <a class="btn-whatsapp" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp kontakt</a>
+          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp kontakt</a>
           <a class="btn-outline" href="mailto:info@magiccodecnc.hr">Pošalji email</a>
         </div>
       </div>
@@ -883,9 +260,9 @@
           <input class="input" id="name" type="text" placeholder="Ime i prezime / tvrtka" required />
           <input class="input" id="email" type="email" placeholder="Email" required />
           <input class="input" id="project" type="text" placeholder="Vrsta projekta" />
-          <textarea id="message" placeholder="Kratko opišite što trebate: materijal, tolerancije, količina, rok..." required></textarea>
+          <textarea id="message" placeholder="Kratko opiši što trebaš: materijal, tolerancije, količina, rok..." required></textarea>
           <input class="input" id="attachment" type="file" />
-          <div class="file-note">Prilog se ne može poslati direktno kroz obični mailto obrazac. Nakon klika na gumb otvorit će se email, a datoteku trebaš ručno priložiti u svom email programu.</div>
+          <div class="file-note">Nakon klika na gumb otvorit će se email s popunjenim podacima. Datoteku treba ručno priložiti u svom email programu.</div>
           <button class="btn" type="submit">Otvori email za slanje upita</button>
         </form>
       </div>
@@ -895,7 +272,7 @@
   <footer class="footer">
     <div class="wrap footer-box">
       <div>© 2026 Magic Code CNC. Sva prava pridržana.</div>
-      <div>CNC programiranje • Precizna obrada • Tehnička podrška</div>
+      <div>CNC programiranje • CNC obrada • Optimizacija proizvodnje</div>
     </div>
   </footer>
 
@@ -904,14 +281,12 @@
   <script>
     document.getElementById('contactForm').addEventListener('submit', function(e){
       e.preventDefault();
-
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const project = document.getElementById('project').value.trim();
       const message = document.getElementById('message').value.trim();
       const attachmentInput = document.getElementById('attachment');
       const attachmentName = attachmentInput.files.length ? attachmentInput.files[0].name : 'Nema priloga';
-
       const subject = encodeURIComponent('Upit preko web stranice - ' + (project || 'CNC usluge'));
       const body = encodeURIComponent(
         'Ime / tvrtka: ' + name + '\n' +
@@ -921,7 +296,6 @@
         'Odabrana datoteka: ' + attachmentName + '\n' +
         'Napomena: datoteku je potrebno ručno priložiti u email programu nakon otvaranja poruke.'
       );
-
       window.location.href = 'mailto:info@magiccodecnc.hr?subject=' + subject + '&body=' + body;
     });
   </script>
