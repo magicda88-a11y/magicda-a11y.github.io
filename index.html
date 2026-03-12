@@ -4,229 +4,668 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magic Code CNC</title>
-  <meta name="description" content="CNC programiranje, optimizacija obrade, izrada pozicija i tehnička podrška za preciznu proizvodnju." />
+  <meta name="description" content="CNC programiranje, optimizacija obrade, izrada visokotočnih pozicija i tehnička podrška za preciznu proizvodnju." />
   <style>
     :root{
-      --bg:#0f1115;
-      --bg-soft:#171a21;
-      --card:#1d222c;
-      --line:#2a3140;
-      --text:#eef2f7;
-      --muted:#b7c0cf;
-      --accent:#d4a017;
-      --accent-2:#f3c64c;
-      --max:1160px;
-      --radius:18px;
-      --shadow:0 20px 50px rgba(0,0,0,.28);
+      --bg:#0b0e13;
+      --bg-2:#11161f;
+      --card:#151b25cc;
+      --card-solid:#151b25;
+      --line:#2a3443;
+      --text:#eef3f8;
+      --muted:#aeb8c7;
+      --gold:#d8a72f;
+      --gold-2:#f0ca6b;
+      --green:#25D366;
+      --max:1180px;
+      --radius:22px;
+      --shadow:0 18px 50px rgba(0,0,0,.30);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(212,160,23,.12), transparent 28%),
-        linear-gradient(180deg,#0d1015,#121722 35%,#0f1115 100%);
       color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
       line-height:1.6;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(216,167,47,.18), transparent 26%),
+        radial-gradient(circle at 100% 20%, rgba(37,211,102,.08), transparent 20%),
+        linear-gradient(180deg, #090c11 0%, #0d1118 35%, #0c1016 100%);
+      overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(100% - 32px,var(--max));margin:0 auto}
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.5), transparent 70%);
+      opacity:.18;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(100% - 32px, var(--max)); margin:0 auto}
+
     .nav{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter: blur(12px);
-      background:rgba(15,17,21,.72);
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(10,13,18,.78);
       border-bottom:1px solid rgba(255,255,255,.06);
     }
+
     .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      min-height:74px;
-      gap:18px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.4px;
-    }
-    .logo{
-      width:40px; height:40px; border-radius:12px;
-      display:grid; place-items:center;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#111;
-      font-weight:900;
-      box-shadow:0 10px 25px rgba(212,160,23,.28);
-    }
-    .menu{display:flex; gap:22px; color:var(--muted); font-size:15px}
-    .menu a:hover{color:var(--text)}
-    .cta, .cta-outline{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:14px 20px; border-radius:999px; font-weight:700;
-      transition:.2s ease;
-    }
-    .cta{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#111;
-      box-shadow:0 10px 30px rgba(212,160,23,.28);
-    }
-    .cta:hover{transform:translateY(-1px)}
-    .cta-outline{
-      border:1px solid rgba(255,255,255,.12);
-      color:var(--text);
-      background:rgba(255,255,255,.03);
-    }
-    .hero{
-      padding:72px 0 48px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:32px;
+      min-height:76px;
+      display:flex;
       align-items:center;
+      justify-content:space-between;
+      gap:16px;
     }
-    .eyebrow{
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:13px; color:var(--accent-2); letter-spacing:.14em; text-transform:uppercase;
-      margin-bottom:14px;
-    }
-    .eyebrow::before{
-      content:"";
-      width:34px; height:1px; background:linear-gradient(90deg,var(--accent),transparent);
-    }
-    h1{
-      font-size:clamp(40px,6vw,68px);
-      line-height:1.02;
-      margin:0 0 18px;
-      letter-spacing:-.03em;
-    }
-    .lead{
-      font-size:clamp(17px,2.2vw,20px);
-      color:var(--muted);
-      max-width:720px;
-      margin:0 0 28px;
-    }
-    .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px}
-    .trust{
-      display:flex; flex-wrap:wrap; gap:16px 26px;
-      color:var(--muted); font-size:14px;
-    }
-    .trust span::before{
-      content:"✓";
-      color:var(--accent-2);
-      margin-right:8px;
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
       font-weight:800;
+      letter-spacing:.04em;
     }
-    .hero-card{
-      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:28px;
-      padding:24px;
-      box-shadow:var(--shadow);
+
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:#111;
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      box-shadow:0 12px 32px rgba(216,167,47,.30);
       position:relative;
       overflow:hidden;
     }
-    .hero-card::after{
+
+    .logo::after{
       content:"";
-      position:absolute; inset:auto -80px -80px auto;
-      width:220px; height:220px; border-radius:50%;
-      background:radial-gradient(circle, rgba(212,160,23,.22), transparent 70%);
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,.45), transparent 45%);
     }
-    .spec{
+
+    .menu{
+      display:flex;
+      gap:22px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .menu a:hover{color:var(--text)}
+
+    .btn, .btn-outline, .btn-whatsapp{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:999px;
+      font-weight:800;
+      transition:.18s ease;
+    }
+
+    .btn{
+      color:#111;
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      box-shadow:0 12px 28px rgba(216,167,47,.25);
+    }
+
+    .btn-outline{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .btn-whatsapp{
+      color:#08120c;
+      background:linear-gradient(135deg, #37e178, var(--green));
+      box-shadow:0 12px 28px rgba(37,211,102,.22);
+    }
+
+    .btn:hover, .btn-outline:hover, .btn-whatsapp:hover{
+      transform:translateY(-1px);
+    }
+
+    .hero{
+      position:relative;
+      padding:78px 0 52px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:16px;
+      color:var(--gold-2);
+      text-transform:uppercase;
+      font-size:13px;
+      letter-spacing:.18em;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:36px;
+      height:1px;
+      background:linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(42px, 6vw, 72px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      max-width:760px;
+    }
+
+    .lead{
+      max-width:720px;
+      color:var(--muted);
+      font-size:clamp(17px,2.1vw,20px);
+      margin:0 0 30px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:28px;
+    }
+
+    .hero-points{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px 24px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hero-points span::before{
+      content:"✓";
+      color:var(--gold-2);
+      font-weight:900;
+      margin-right:8px;
+    }
+
+    .visual-panel{
+      position:relative;
+      min-height:520px;
+      border-radius:28px;
+      overflow:hidden;
       border:1px solid rgba(255,255,255,.08);
-      background:rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:16px;
-      margin-bottom:14px;
-    }
-    .spec small{display:block; color:var(--muted); margin-bottom:6px}
-    .spec strong{font-size:18px}
-    section{padding:44px 0}
-    .section-head{max-width:740px; margin-bottom:24px}
-    .section-head h2{
-      margin:0 0 10px;
-      font-size:clamp(28px,4vw,42px);
-      letter-spacing:-.03em;
-    }
-    .section-head p{margin:0; color:var(--muted)}
-    .grid-3{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
-    }
-    .card{
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      padding:22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        radial-gradient(circle at 20% 20%, rgba(216,167,47,.12), transparent 28%),
+        linear-gradient(180deg, #131924 0%, #10151d 100%);
       box-shadow:var(--shadow);
     }
+
+    .machine-glow{
+      position:absolute;
+      inset:auto -80px -90px auto;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(216,167,47,.18), transparent 70%);
+    }
+
+    .machine{
+      position:absolute;
+      inset:22px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
+        linear-gradient(135deg, #131922 0%, #0d1118 100%);
+      overflow:hidden;
+    }
+
+    .machine-top{
+      position:absolute;
+      inset:0 0 auto 0;
+      height:58px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:0 18px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.03);
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.18);
+    }
+
+    .machine-screen{
+      position:absolute;
+      left:28px;
+      top:90px;
+      width:42%;
+      height:170px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(24,34,47,.92), rgba(9,15,22,.96)),
+        radial-gradient(circle at 70% 20%, rgba(37,211,102,.12), transparent 20%);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+      padding:18px;
+    }
+
+    .screen-line{
+      height:10px;
+      border-radius:999px;
+      margin-bottom:12px;
+      background:linear-gradient(90deg, rgba(240,202,107,.85), rgba(240,202,107,.16));
+    }
+
+    .screen-line.small{width:58%}
+    .screen-line.mid{width:78%}
+    .screen-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .screen-cell{
+      height:48px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .screen-cell::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(37,211,102,.8), transparent);
+    }
+
+    .arm{
+      position:absolute;
+      right:38px;
+      top:100px;
+      width:168px;
+      height:250px;
+    }
+
+    .arm-head{
+      position:absolute;
+      right:30px;
+      top:0;
+      width:92px;
+      height:42px;
+      border-radius:16px;
+      background:linear-gradient(180deg, #2a3342, #161d28);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 22px rgba(0,0,0,.24);
+    }
+
+    .arm-head::after{
+      content:"";
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:8px;
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(240,202,107,.9), rgba(240,202,107,.2));
+    }
+
+    .arm-body{
+      position:absolute;
+      right:64px;
+      top:38px;
+      width:24px;
+      height:164px;
+      border-radius:14px;
+      background:linear-gradient(180deg, #303a49, #151b25);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .arm-tool{
+      position:absolute;
+      right:45px;
+      top:194px;
+      width:62px;
+      height:34px;
+      border-radius:12px;
+      background:linear-gradient(180deg, #323c4d, #18202b);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .arm-tool::after{
+      content:"";
+      position:absolute;
+      left:27px;
+      top:33px;
+      width:8px;
+      height:72px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #f0ca6b, #7e5a0a);
+      box-shadow:0 0 18px rgba(240,202,107,.18);
+    }
+
+    .workpiece{
+      position:absolute;
+      left:42%;
+      right:38px;
+      bottom:46px;
+      height:110px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.09);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)),
+        repeating-linear-gradient(
+          90deg,
+          rgba(240,202,107,.08) 0 14px,
+          rgba(255,255,255,.03) 14px 28px
+        ),
+        linear-gradient(180deg, #1c2330, #121821);
+      overflow:hidden;
+    }
+
+    .workpiece::before{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      top:26px;
+      height:1px;
+      background:rgba(255,255,255,.08);
+    }
+
+    .workpiece::after{
+      content:"";
+      position:absolute;
+      left:22px;
+      top:42px;
+      width:90px;
+      height:40px;
+      border-radius:10px;
+      border:1px solid rgba(240,202,107,.28);
+      background:rgba(240,202,107,.06);
+    }
+
+    .badge-row{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:22px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .mini{
+      padding:14px 14px;
+      border-radius:16px;
+      background:rgba(11,16,24,.72);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .mini small{
+      display:block;
+      color:var(--muted);
+      margin-bottom:4px;
+      font-size:12px;
+    }
+
+    .mini strong{font-size:16px}
+
+    section{padding:48px 0}
+    .section-head{
+      max-width:760px;
+      margin-bottom:26px;
+    }
+
+    .section-head h2{
+      margin:0 0 10px;
+      font-size:clamp(30px,4vw,44px);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
     .icon{
-      width:46px; height:46px; border-radius:14px; display:grid; place-items:center;
-      margin-bottom:14px; font-size:22px;
-      background:rgba(212,160,23,.12);
-      border:1px solid rgba(212,160,23,.2);
+      width:48px;
+      height:48px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      margin-bottom:14px;
+      background:rgba(216,167,47,.11);
+      border:1px solid rgba(216,167,47,.24);
+      font-size:23px;
     }
-    .card h3{margin:0 0 10px; font-size:20px}
-    .card p{margin:0; color:var(--muted)}
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:20px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .process{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .step{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .step::after{
+      content:"";
+      position:absolute;
+      right:-20px;
+      top:-20px;
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(216,167,47,.12), transparent 70%);
+    }
+
+    .step-num{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--gold), var(--gold-2));
+      color:#111;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
     .about{
-      display:grid; grid-template-columns:1fr 1fr; gap:22px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
     }
+
     .stat-grid{
-      display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:18px;
     }
+
     .stat{
-      padding:18px; border-radius:16px;
+      border-radius:16px;
+      padding:18px;
       background:rgba(255,255,255,.03);
       border:1px solid rgba(255,255,255,.08);
     }
-    .stat strong{display:block; font-size:28px; margin-bottom:4px}
-    .process{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+
+    .stat strong{
+      display:block;
+      font-size:28px;
+      margin-bottom:4px;
+      color:var(--gold-2);
     }
-    .step-num{
-      width:34px; height:34px; border-radius:999px; display:grid; place-items:center;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#111; font-weight:900; margin-bottom:14px;
-    }
+
     .contact{
-      display:grid; grid-template-columns:1.05fr .95fr; gap:22px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
       align-items:start;
     }
-    .contact-list{display:grid; gap:12px; margin-top:18px}
+
+    .contact-list{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
     .contact-item{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:14px 16px; border-radius:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:15px 16px;
+      border-radius:16px;
       background:rgba(255,255,255,.03);
       border:1px solid rgba(255,255,255,.08);
     }
-    .form{
-      display:grid; gap:14px;
+
+    .contact-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
     }
+
+    .form{
+      display:grid;
+      gap:14px;
+    }
+
     .input, textarea{
       width:100%;
       padding:14px 15px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
+      background:rgba(255,255,255,.035);
       color:var(--text);
       outline:none;
+      font:inherit;
     }
-    textarea{min-height:130px; resize:vertical}
-    .input::placeholder, textarea::placeholder{color:#95a0b3}
+
+    .input:focus, textarea:focus{
+      border-color:rgba(240,202,107,.38);
+      box-shadow:0 0 0 3px rgba(240,202,107,.08);
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:138px;
+    }
+
+    .file-note{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:-2px;
+    }
+
     .footer{
-      padding:28px 0 60px;
+      padding:28px 0 56px;
       color:var(--muted);
       font-size:14px;
     }
+
     .footer-box{
-      padding-top:22px;
       border-top:1px solid rgba(255,255,255,.08);
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding-top:22px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
+
+    .floating-wa{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:60;
+      width:60px;
+      height:60px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      color:#08120c;
+      background:linear-gradient(135deg, #37e178, var(--green));
+      box-shadow:0 18px 35px rgba(37,211,102,.28);
+      font-size:28px;
+    }
+
     @media (max-width: 980px){
-      .hero-grid,.about,.contact,.process,.grid-3{grid-template-columns:1fr}
-      .process{gap:14px}
+      .hero-grid, .grid-3, .about, .contact, .process{
+        grid-template-columns:1fr;
+      }
+      .visual-panel{
+        min-height:460px;
+      }
     }
+
     @media (max-width: 760px){
       .menu{display:none}
       .hero{padding-top:42px}
       .nav-inner{min-height:66px}
+      .badge-row{grid-template-columns:1fr}
       .stat-grid{grid-template-columns:1fr}
+      .machine-screen{width:calc(100% - 56px); height:140px}
+      .arm{right:20px; top:248px; transform:scale(.9)}
+      .workpiece{left:22px; right:22px; bottom:90px}
     }
   </style>
 </head>
@@ -243,42 +682,73 @@
         <a href="#onama">O nama</a>
         <a href="#kontakt">Kontakt</a>
       </div>
-      <a class="cta" href="#kontakt">Zatraži ponudu</a>
+      <a class="btn" href="#kontakt">Zatraži ponudu</a>
     </div>
   </nav>
 
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">CNC programiranje • precizna proizvodnja</div>
-        <h1>Precizno CNC programiranje za ozbiljnu proizvodnju.</h1>
+        <div class="eyebrow">CNC programiranje • precizna obrada</div>
+        <h1>Pouzdan CNC partner za preciznu i efikasnu proizvodnju.</h1>
         <p class="lead">
-          Izrada i optimizacija CNC programa, visokotočnih pozicija i tehnička podrška za
-          stabilniju, bržu i pouzdaniju obradu. Fokus na kvalitetu, ponovljivost i uštedu vremena u proizvodnji.
+          Izrada i optimizacija CNC programa, visokotočne pozicije i tehnička podrška za radionice
+          i proizvodnju koje traže stabilan proces, manje zastoja i bolju ponovljivost.
         </p>
         <div class="hero-actions">
-          <a class="cta" href="#kontakt">Pošalji upit</a>
-          <a class="cta-outline" href="#usluge">Pogledaj usluge</a>
+          <a class="btn" href="#kontakt">Pošalji upit</a>
+          <a class="btn-outline" href="#usluge">Pogledaj usluge</a>
+          <a class="btn-whatsapp" href="https://wa.me/385000000000?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp</a>
         </div>
-        <div class="trust">
-          <span>Brza priprema programa</span>
-          <span>Optimizacija vremena obrade</span>
+        <div class="hero-points">
+          <span>Brža priprema obrade</span>
           <span>Preciznost i ponovljivost</span>
+          <span>Optimizacija vremena ciklusa</span>
         </div>
       </div>
 
-      <div class="hero-card">
-        <div class="spec">
-          <small>Glavni fokus</small>
-          <strong>CNC programiranje i optimizacija</strong>
+      <div class="visual-panel" aria-hidden="true">
+        <div class="machine-glow"></div>
+        <div class="machine">
+          <div class="machine-top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="machine-screen">
+            <div class="screen-line mid"></div>
+            <div class="screen-line"></div>
+            <div class="screen-line small"></div>
+            <div class="screen-grid">
+              <div class="screen-cell"></div>
+              <div class="screen-cell"></div>
+              <div class="screen-cell"></div>
+              <div class="screen-cell"></div>
+              <div class="screen-cell"></div>
+              <div class="screen-cell"></div>
+            </div>
+          </div>
+          <div class="arm">
+            <div class="arm-head"></div>
+            <div class="arm-body"></div>
+            <div class="arm-tool"></div>
+          </div>
+          <div class="workpiece"></div>
         </div>
-        <div class="spec">
-          <small>Za koga radimo</small>
-          <strong>Proizvodnja, obrada metala, prototipi i serije</strong>
-        </div>
-        <div class="spec">
-          <small>Što dobivate</small>
-          <strong>Manje zastoja, bolju preciznost i sigurniji proces</strong>
+
+        <div class="badge-row">
+          <div class="mini">
+            <small>Fokus</small>
+            <strong>CNC programiranje</strong>
+          </div>
+          <div class="mini">
+            <small>Rezultat</small>
+            <strong>Manje grešaka i zastoja</strong>
+          </div>
+          <div class="mini">
+            <small>Prednost</small>
+            <strong>Brža i sigurnija obrada</strong>
+          </div>
         </div>
       </div>
     </div>
@@ -288,23 +758,23 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Usluge</h2>
-        <p>Praktična podrška za radionice i proizvodne sustave kojima treba pouzdano CNC programiranje, kvalitetna priprema i precizna izvedba.</p>
+        <p>Praktična rješenja za proizvodnju, od pripreme CNC programa do optimizacije obrade i podrške u stvarnom radu na stroju.</p>
       </div>
       <div class="grid-3">
         <article class="card">
           <div class="icon">⚙️</div>
           <h3>CNC programiranje</h3>
-          <p>Izrada novih programa za pojedinačne komade, male serije i ponovljivu proizvodnju uz fokus na stabilnost procesa.</p>
+          <p>Izrada novih programa za pojedinačne komade, prototipe i serijsku proizvodnju uz jasan i pouzdan proces.</p>
         </article>
         <article class="card">
           <div class="icon">📐</div>
           <h3>Visokotočne pozicije</h3>
-          <p>Priprema i podešavanje preciznih pozicija, nultih točaka i logike obrade za siguran i ponovljiv rezultat.</p>
+          <p>Precizno definiranje pozicija, referenci i logike obrade za stabilan rezultat i sigurniji rad.</p>
         </article>
         <article class="card">
           <div class="icon">🚀</div>
-          <h3>Optimizacija obrade</h3>
-          <p>Smanjenje vremena ciklusa, unapređenje putanje alata i uklanjanje uskih grla u postojećem procesu.</p>
+          <h3>Optimizacija procesa</h3>
+          <p>Smanjenje vremena ciklusa, poboljšanje putanje alata i uklanjanje slabih točaka u postojećoj obradi.</p>
         </article>
       </div>
     </div>
@@ -314,28 +784,28 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Kako radimo</h2>
-        <p>Jasan proces bez nepotrebnog kompliciranja, od tehničkog zahtjeva do gotovog programa spremnog za proizvodnju.</p>
+        <p>Jasan redoslijed od tehničkog zahtjeva do gotovog programa spremnog za proizvodnju.</p>
       </div>
       <div class="process">
-        <article class="card">
+        <article class="card step">
           <div class="step-num">1</div>
-          <h3>Analiza zahtjeva</h3>
-          <p>Pregled nacrta, tolerancija, materijala i očekivanog načina obrade.</p>
+          <h3>Analiza</h3>
+          <p>Pregled nacrta, materijala, tolerancija i očekivane dinamike proizvodnje.</p>
         </article>
-        <article class="card">
+        <article class="card step">
           <div class="step-num">2</div>
-          <h3>Priprema programa</h3>
-          <p>Definiranje strategije obrade, alata, redoslijeda i ključnih kontrolnih točaka.</p>
+          <h3>Priprema</h3>
+          <p>Definiranje strategije obrade, redoslijeda operacija i izbora alata.</p>
         </article>
-        <article class="card">
+        <article class="card step">
           <div class="step-num">3</div>
           <h3>Optimizacija</h3>
-          <p>Provjera preciznosti, sigurnosti i učinkovitosti prije puštanja u proizvodnju.</p>
+          <p>Provjera učinkovitosti, sigurnosti i preciznosti prije puštanja u rad.</p>
         </article>
-        <article class="card">
+        <article class="card step">
           <div class="step-num">4</div>
-          <h3>Podrška i dorade</h3>
-          <p>Po potrebi korekcije i dodatna prilagodba stvarnim uvjetima na stroju.</p>
+          <h3>Podrška</h3>
+          <p>Po potrebi dorade i prilagodbe stvarnim uvjetima na stroju i u proizvodnji.</p>
         </article>
       </div>
     </div>
@@ -347,30 +817,29 @@
         <div class="section-head" style="margin-bottom:0">
           <h2>O nama</h2>
           <p>
-            Magic Code CNC bavi se CNC programiranjem i izradom visokotočnih pozicija s naglaskom
-            na preciznost, pouzdanost i praktična rješenja za proizvodnju. Cilj je isporučiti program
-            koji radi stabilno, razumljivo i učinkovito u stvarnim uvjetima rada.
+            Magic Code CNC fokusiran je na CNC programiranje, visokotočne pozicije i optimizaciju obrade.
+            Cilj je jednostavan: stabilan program koji radi pouzdano, precizno i učinkovito u stvarnoj proizvodnji.
           </p>
         </div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Zašto odabrati nas</h3>
+        <h3 style="margin-top:0">Zašto Magic Code CNC</h3>
         <div class="stat-grid">
           <div class="stat">
             <strong>Preciznost</strong>
-            <span>Tolerancije i detalji bez improvizacije.</span>
+            <span>Tolerancije i detalji pod kontrolom.</span>
           </div>
           <div class="stat">
             <strong>Pouzdanost</strong>
-            <span>Jasan i logičan pristup pripremi obrade.</span>
+            <span>Jasna logika obrade bez improvizacije.</span>
           </div>
           <div class="stat">
-            <strong>Brzina</strong>
-            <span>Kraće vrijeme pripreme i bolja protočnost.</span>
+            <strong>Ušteda</strong>
+            <span>Manje zastoja i kraće vrijeme pripreme.</span>
           </div>
           <div class="stat">
             <strong>Podrška</strong>
-            <span>Dorade i prilagodba po potrebi proizvodnje.</span>
+            <span>Dorade prema stvarnim uvjetima rada.</span>
           </div>
         </div>
       </div>
@@ -382,12 +851,13 @@
       <div class="card">
         <div class="section-head" style="margin-bottom:0">
           <h2>Kontakt</h2>
-          <p>Pošalji osnovne informacije o projektu i javimo se s prijedlogom rješenja.</p>
+          <p>Pošalji osnovne informacije o projektu i javljamo se s prijedlogom rješenja.</p>
         </div>
+
         <div class="contact-list">
           <div class="contact-item">
             <div>📧</div>
-            <div><strong>Email</strong><br>info@magiccodecnc.hr</div>
+            <div><strong>Email</strong><br><a href="mailto:info@magiccodecnc.hr">info@magiccodecnc.hr</a></div>
           </div>
           <div class="contact-item">
             <div>📍</div>
@@ -398,16 +868,23 @@
             <div><strong>Odgovor</strong><br>U najkraćem mogućem roku</div>
           </div>
         </div>
+
+        <div class="contact-actions">
+          <a class="btn-whatsapp" href="https://wa.me/385000000000?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp kontakt</a>
+          <a class="btn-outline" href="mailto:info@magiccodecnc.hr">Pošalji email</a>
+        </div>
       </div>
 
       <div class="card">
         <h3 style="margin-top:0">Pošalji upit</h3>
-        <form class="form">
-          <input class="input" type="text" placeholder="Ime i prezime / tvrtka" />
-          <input class="input" type="email" placeholder="Email" />
-          <input class="input" type="text" placeholder="Vrsta projekta" />
-          <textarea placeholder="Kratko opišite što trebate: materijal, tolerancije, količina, rok..."></textarea>
-          <button class="cta" type="button">Pošalji upit</button>
+        <form class="form" id="contactForm">
+          <input class="input" id="name" type="text" placeholder="Ime i prezime / tvrtka" required />
+          <input class="input" id="email" type="email" placeholder="Email" required />
+          <input class="input" id="project" type="text" placeholder="Vrsta projekta" />
+          <textarea id="message" placeholder="Kratko opišite što trebate: materijal, tolerancije, količina, rok..." required></textarea>
+          <input class="input" id="attachment" type="file" />
+          <div class="file-note">Prilog se ne može poslati direktno kroz obični mailto obrazac. Nakon klika na gumb otvorit će se email, a datoteku trebaš ručno priložiti u svom email programu.</div>
+          <button class="btn" type="submit">Otvori email za slanje upita</button>
         </form>
       </div>
     </div>
@@ -419,5 +896,32 @@
       <div>CNC programiranje • Precizna obrada • Tehnička podrška</div>
     </div>
   </footer>
+
+  <a class="floating-wa" href="https://wa.me/385000000000?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const project = document.getElementById('project').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const attachmentInput = document.getElementById('attachment');
+      const attachmentName = attachmentInput.files.length ? attachmentInput.files[0].name : 'Nema priloga';
+
+      const subject = encodeURIComponent('Upit preko web stranice - ' + (project || 'CNC usluge'));
+      const body = encodeURIComponent(
+        'Ime / tvrtka: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Projekt: ' + (project || '-') + '\n\n' +
+        'Opis upita:\n' + message + '\n\n' +
+        'Odabrana datoteka: ' + attachmentName + '\n' +
+        'Napomena: datoteku je potrebno ručno priložiti u email programu nakon otvaranja poruke.'
+      );
+
+      window.location.href = 'mailto:info@magiccodecnc.hr?subject=' + subject + '&body=' + body;
+    });
+  </script>
 </body>
 </html>
