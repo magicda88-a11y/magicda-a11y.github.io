@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://magiccodecnc.hr/sitemap.xml
