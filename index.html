@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MagicCode CNC | CNC Programming Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0b;
+  --blue:#007bff;
+  --gray:#6c757d;
+  --white:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);}
+header{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f1f1f;}
+.logo{font-family:'Orbitron',sans-serif;font-size:26px;color:var(--blue);}
+nav a{color:var(--white);margin-left:25px;text-decoration:none;font-size:14px;}
+nav a:hover{color:var(--blue);}
+
+.hero{height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at top,#0d1b2a,#0b0b0b);} 
+.hero h1{font-size:64px;font-family:'Orbitron',sans-serif;color:var(--blue);} 
+.hero p{margin-top:20px;font-size:20px;color:#ccc;} 
+.hero .btn{margin-top:35px;padding:15px 35px;background:var(--blue);border:none;color:white;font-size:16px;border-radius:6px;cursor:pointer;}
+
+section{padding:100px 80px;}
+.section-title{text-align:center;font-size:36px;font-family:'Orbitron',sans-serif;margin-bottom:60px;color:var(--blue);} 
+
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;}
+.card{background:#111;border:1px solid #1f1f1f;padding:30px;border-radius:12px;transition:0.3s;} 
+.card:hover{transform:translateY(-8px);border-color:var(--blue);} 
+.card h3{color:var(--blue);margin-bottom:15px;} 
+
+.about{text-align:center;max-width:900px;margin:auto;color:#ccc;font-size:18px;line-height:1.7;} 
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;margin:auto;} 
+.contact input,.contact textarea{width:100%;padding:15px;background:#111;border:1px solid #1f1f1f;color:white;border-radius:6px;} 
+.contact button{padding:15px;background:var(--blue);border:none;color:white;border-radius:6px;font-size:16px;cursor:pointer;} 
+
+footer{text-align:center;padding:40px;border-top:1px solid #1f1f1f;color:#777;font-size:14px;} 
+
+@media(max-width:800px){
+.hero h1{font-size:42px;} 
+.contact{grid-template-columns:1fr;} 
+header{flex-direction:column;gap:15px;} 
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MagicCode CNC</div>
+  <nav>
+    <a href="#home">Početna</a>
+    <a href="#services">Usluge</a>
+    <a href="#about">O nama</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div>
+    <h1>MagicCode CNC</h1>
+    <p>Precision in Every Line of Code</p>
+    <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Kontaktiraj nas</button>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="section-title">Usluge</h2>
+  <div class="services">
+    <div class="card"><h3>CNC Programiranje</h3><p>Profesionalno CNC programiranje za sve tipove strojeva.</p></div>
+    <div class="card"><h3>G-Code Optimizacija</h3><p>Povećanje brzine, preciznosti i učinkovitosti obrade.</p></div>
+    <div class="card"><h3>CAM Priprema</h3><p>Digitalna priprema proizvodnje i postprocesiranje.</p></div>
+    <div class="card"><h3>Automatizacija</h3><p>Industrijska automatizacija i integracija sustava.</p></div>
+  </div>
+</section>
+
+<section id="about">
+  <h2 class="section-title">O nama</h2>
+  <div class="about">
+    MagicCode CNC je specijalizirani CNC programming studio fokusiran na preciznost, učinkovitost i tehnološku izvrsnost.
+    Naš fokus je kod, logika i industrijska automatizacija.
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Kontakt</h2>
+  <div class="contact">
+    <div>
+      <p><b>MagicCode CNC</b></p><br>
+      <p>Email: info@magiccodecnc.com</p>
+      <p>Telefon: +385 xx xxx xxxx</p>
+      <p>Web: www.magiccodecnc.com</p>
+    </div>
+    <div>
+      <form>
+        <input type="text" placeholder="Ime" required><br><br>
+        <input type="email" placeholder="Email" required><br><br>
+        <textarea rows="5" placeholder="Poruka" required></textarea><br><br>
+        <button type="submit">Pošalji</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 MagicCode CNC — Precision in Every Line of Code
+</footer>
+
+</body>
+</html>
