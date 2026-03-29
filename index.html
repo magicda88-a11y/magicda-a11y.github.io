@@ -3,89 +3,344 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CNC programiranje i optimizacija obrade | Magic Code CNC</title>
+  <title>Magic Code CNC | CNC programiranje i optimizacija obrade</title>
   <meta name="description" content="Magic Code CNC nudi CNC programiranje, optimizaciju obrade, visokotočne pozicije i tehničku podršku za preciznu proizvodnju u Hrvatskoj." />
   <meta name="keywords" content="CNC programiranje, CNC obrada, CNC programer Hrvatska, optimizacija CNC obrade, visokotočne pozicije, precizna proizvodnja, CNC usluge" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Magic Code CNC" />
   <link rel="canonical" href="https://magiccodecnc.hr/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="CNC programiranje i optimizacija obrade | Magic Code CNC" />
+  <meta property="og:title" content="Magic Code CNC | CNC programiranje i optimizacija obrade" />
   <meta property="og:description" content="CNC programiranje, optimizacija obrade i visokotočne pozicije za proizvodnju i obradu metala." />
   <meta property="og:url" content="https://magiccodecnc.hr/" />
   <meta property="og:site_name" content="Magic Code CNC" />
   <style>
-    :root{--bg:#090d12;--bg2:#101722;--card:rgba(18,24,34,.82);--text:#edf3fa;--muted:#a9b5c7;--gold:#d9a72a;--gold2:#f0cb72;--green:#25D366;--green2:#44e283;--max:1180px;--radius:24px;--shadow:0 20px 60px rgba(0,0,0,.32)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6;background:radial-gradient(circle at 0% 0%, rgba(217,167,42,.16), transparent 26%),radial-gradient(circle at 100% 20%, rgba(37,211,102,.08), transparent 20%),linear-gradient(180deg,#080b10 0%,#0b1017 38%,#0d1219 100%);overflow-x:hidden}
-    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 72%);opacity:.18}
-    a{color:inherit;text-decoration:none}.wrap{width:min(100% - 32px, var(--max));margin:0 auto}
-    .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(8,12,18,.76);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}
-    .logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 12px 32px rgba(217,167,42,.28);position:relative;overflow:hidden}
-    .logo::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg, rgba(255,255,255,.4), transparent 48%)}
-    .menu{display:flex;gap:22px;color:var(--muted);font-size:15px}.menu a:hover{color:var(--text)}
-    .btn,.btn-outline,.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 20px;border-radius:999px;font-weight:800;transition:.18s ease}
-    .btn{color:#111;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 12px 28px rgba(217,167,42,.24)}
-    .btn-outline{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text)}
-    .btn-wa{color:#08120c;background:linear-gradient(135deg,var(--green2),var(--green));box-shadow:0 12px 28px rgba(37,211,102,.22)}
-    .btn:hover,.btn-outline:hover,.btn-wa:hover{transform:translateY(-1px)}
-    .hero{padding:82px 0 56px;position:relative}
-    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:32px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;color:var(--gold2);text-transform:uppercase;font-size:13px;letter-spacing:.18em}
-    .eyebrow::before{content:"";width:38px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
-    h1{margin:0 0 18px;font-size:clamp(42px,6vw,74px);line-height:1.01;letter-spacing:-.045em;max-width:780px}
-    .lead{margin:0 0 30px;max-width:760px;color:var(--muted);font-size:clamp(17px,2.1vw,20px)}
+    :root{
+      --bg:#07090c;
+      --bg2:#0d1117;
+      --panel:#11161d;
+      --panel2:#161c24;
+      --card:rgba(20,26,34,.9);
+      --text:#eef2f7;
+      --muted:#a7b1bf;
+      --line:rgba(255,255,255,.09);
+      --silver:#d7dde5;
+      --silver2:#8d99a8;
+      --accent:#f0cb72;
+      --green:#25D366;
+      --green2:#4be38a;
+      --max:1200px;
+      --radius:24px;
+      --shadow:0 24px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      line-height:1.6;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,.06), transparent 22%),
+        radial-gradient(circle at 100% 10%, rgba(240,203,114,.08), transparent 18%),
+        linear-gradient(180deg,#06080b 0%,#0a0d12 35%,#0c1015 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.5), transparent 75%);
+      opacity:.18;
+    }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100% - 32px, var(--max));margin:0 auto}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(14px);
+      background:rgba(7,9,12,.84);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      min-height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+    .brand-logo{
+      width:68px;
+      height:48px;
+      object-fit:contain;
+      border-radius:10px;
+      filter:drop-shadow(0 10px 22px rgba(255,255,255,.08));
+    }
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+    .brand-text strong{
+      font-size:18px;
+      letter-spacing:.04em;
+    }
+    .brand-text span{
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+    }
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .menu a:hover,.menu a.active{color:var(--text)}
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:6px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font:inherit;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    .lang-btn.active{
+      color:#0d1117;
+      background:linear-gradient(135deg,var(--silver),#ffffff);
+    }
+    .btn,.btn-outline,.btn-wa{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:50px;
+      padding:0 22px;
+      border-radius:999px;
+      font-weight:800;
+      transition:.18s ease;
+      border:0;
+      cursor:pointer;
+      font:inherit;
+    }
+    .btn{
+      color:#0c1015;
+      background:linear-gradient(135deg,var(--silver),#ffffff);
+      box-shadow:0 14px 34px rgba(255,255,255,.12);
+    }
+    .btn-outline{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-wa{
+      color:#08120c;
+      background:linear-gradient(135deg,var(--green2),var(--green));
+      box-shadow:0 14px 34px rgba(37,211,102,.2);
+    }
+    .btn:hover,.btn-outline:hover,.btn-wa:hover,.lang-btn:hover{transform:translateY(-1px)}
+
+    .hero{padding:84px 0 58px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+      color:var(--silver);
+      text-transform:uppercase;
+      font-size:12px;
+      letter-spacing:.22em;
+    }
+    .eyebrow::before{
+      content:"";
+      width:42px;
+      height:1px;
+      background:linear-gradient(90deg,var(--silver),transparent);
+    }
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(40px,6vw,72px);
+      line-height:1.02;
+      letter-spacing:-.05em;
+      max-width:760px;
+    }
+    .lead{
+      margin:0 0 30px;
+      max-width:740px;
+      color:var(--muted);
+      font-size:clamp(17px,2vw,20px);
+    }
     .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
     .hero-points{display:flex;flex-wrap:wrap;gap:14px 22px;color:var(--muted);font-size:14px}
-    .hero-points span::before{content:"✓";color:var(--gold2);font-weight:900;margin-right:8px}
-    .visual-panel{position:relative;min-height:560px;border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),radial-gradient(circle at 20% 20%, rgba(217,167,42,.12), transparent 28%),linear-gradient(180deg,#131a25 0%,#0f141d 100%)}
-    .machine-glow{position:absolute;right:-90px;bottom:-100px;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle, rgba(217,167,42,.2), transparent 70%)}
-    .machine{position:absolute;inset:22px;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012)),linear-gradient(135deg, #131922 0%, #0b1017 100%)}
-    .machine-top{position:absolute;inset:0 0 auto 0;height:58px;display:flex;align-items:center;gap:8px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+    .hero-points span::before{content:"✓";color:var(--accent);font-weight:900;margin-right:8px}
+
+    .visual-panel{
+      position:relative;
+      min-height:600px;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.12), transparent 22%),
+        radial-gradient(circle at 100% 0%, rgba(240,203,114,.09), transparent 24%),
+        linear-gradient(180deg,#151a21 0%,#0d1218 100%);
+    }
+    .visual-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.18) 100%);
+      pointer-events:none;
+    }
+    .hero-logo-box{
+      position:absolute;
+      top:26px;
+      left:26px;
+      right:26px;
+      padding:14px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.24);
+      backdrop-filter:blur(6px);
+    }
+    .hero-logo{
+      width:100%;
+      border-radius:16px;
+      object-fit:cover;
+      box-shadow:0 16px 34px rgba(0,0,0,.32);
+    }
+    .machine-area{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:24px;
+      top:180px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.07);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+        linear-gradient(135deg, #151a22 0%, #0b0f15 100%);
+    }
+    .machine-top{position:absolute;inset:0 0 auto 0;height:56px;display:flex;align-items:center;gap:8px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
     .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.18)}
-    .machine-screen{position:absolute;left:28px;top:90px;width:43%;height:176px;border-radius:18px;border:1px solid rgba(255,255,255,.1);padding:18px;background:linear-gradient(180deg, rgba(22,34,47,.92), rgba(8,14,21,.97)),radial-gradient(circle at 70% 20%, rgba(37,211,102,.12), transparent 22%)}
-    .screen-line{height:10px;border-radius:999px;margin-bottom:12px;background:linear-gradient(90deg, rgba(240,203,114,.9), rgba(240,203,114,.15))}.screen-line.small{width:55%}.screen-line.mid{width:78%}
+    .machine-screen{position:absolute;left:28px;top:86px;width:43%;height:176px;border-radius:18px;border:1px solid rgba(255,255,255,.1);padding:18px;background:linear-gradient(180deg, rgba(23,30,38,.94), rgba(9,13,18,.98))}
+    .screen-line{height:10px;border-radius:999px;margin-bottom:12px;background:linear-gradient(90deg, rgba(215,221,229,.95), rgba(215,221,229,.14))}
+    .screen-line.small{width:55%}
+    .screen-line.mid{width:78%}
     .screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
     .screen-cell{height:48px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
-    .screen-cell::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg, transparent, rgba(37,211,102,.82), transparent)}
+    .screen-cell::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg, transparent, rgba(240,203,114,.86), transparent)}
     .arm{position:absolute;right:38px;top:98px;width:176px;height:254px}
-    .arm-head{position:absolute;right:30px;top:0;width:96px;height:44px;border-radius:16px;background:linear-gradient(180deg,#2b3545,#171e29);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 22px rgba(0,0,0,.24)}
+    .arm-head{position:absolute;right:30px;top:0;width:96px;height:44px;border-radius:16px;background:linear-gradient(180deg,#3a4350,#171d26);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 22px rgba(0,0,0,.24)}
     .arm-head::after{content:"";position:absolute;left:16px;right:16px;bottom:8px;height:4px;border-radius:999px;background:linear-gradient(90deg, rgba(240,203,114,.92), rgba(240,203,114,.16))}
-    .arm-body{position:absolute;right:66px;top:40px;width:24px;height:166px;border-radius:14px;background:linear-gradient(180deg,#313b4a,#151c26);border:1px solid rgba(255,255,255,.08)}
-    .arm-tool{position:absolute;right:47px;top:198px;width:64px;height:34px;border-radius:12px;background:linear-gradient(180deg,#323d4e,#19212c);border:1px solid rgba(255,255,255,.08)}
+    .arm-body{position:absolute;right:66px;top:40px;width:24px;height:166px;border-radius:14px;background:linear-gradient(180deg,#475261,#1a2028);border:1px solid rgba(255,255,255,.08)}
+    .arm-tool{position:absolute;right:47px;top:198px;width:64px;height:34px;border-radius:12px;background:linear-gradient(180deg,#485362,#1d232d);border:1px solid rgba(255,255,255,.08)}
     .arm-tool::after{content:"";position:absolute;left:28px;top:33px;width:8px;height:78px;border-radius:999px;background:linear-gradient(180deg,#f0cb72,#7f5d0a);box-shadow:0 0 18px rgba(240,203,114,.18)}
-    .workpiece{position:absolute;left:42%;right:38px;bottom:46px;height:116px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),repeating-linear-gradient(90deg,rgba(240,203,114,.085) 0 14px,rgba(255,255,255,.03) 14px 28px),linear-gradient(180deg,#1d2531,#111821);overflow:hidden}
+    .workpiece{position:absolute;left:42%;right:38px;bottom:46px;height:116px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),repeating-linear-gradient(90deg,rgba(240,203,114,.085) 0 14px,rgba(255,255,255,.03) 14px 28px),linear-gradient(180deg,#252d39,#121820);overflow:hidden}
     .workpiece::before{content:"";position:absolute;left:0;right:0;top:26px;height:1px;background:rgba(255,255,255,.08)}
     .workpiece::after{content:"";position:absolute;left:22px;top:44px;width:92px;height:40px;border-radius:10px;border:1px solid rgba(240,203,114,.28);background:rgba(240,203,114,.06)}
     .badge-row{position:absolute;left:22px;right:22px;bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .mini{padding:14px;border-radius:16px;background:rgba(11,16,24,.72);border:1px solid rgba(255,255,255,.08)}
-    .mini small{display:block;color:var(--muted);margin-bottom:4px;font-size:12px}.mini strong{font-size:16px}
-    section{padding:52px 0}.section-head{max-width:780px;margin-bottom:26px}.section-head h2{margin:0 0 10px;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.03em}.section-head p{margin:0;color:var(--muted)}
-    .grid-3,.seo{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.024));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-    .icon{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;margin-bottom:14px;background:rgba(217,167,42,.11);border:1px solid rgba(217,167,42,.22);font-size:24px}
-    .card h3{margin:0 0 10px;font-size:20px}.card p{margin:0;color:var(--muted)}
+    .mini{padding:14px;border-radius:16px;background:rgba(11,16,24,.78);border:1px solid rgba(255,255,255,.08)}
+    .mini small{display:block;color:var(--muted);margin-bottom:4px;font-size:12px}
+    .mini strong{font-size:16px}
+
+    section{padding:54px 0}
+    .section-head{max-width:780px;margin-bottom:26px}
+    .section-head h2{margin:0 0 10px;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.03em}
+    .section-head p{margin:0;color:var(--muted)}
+    .grid-3,.seo,.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.024));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;margin-bottom:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:24px}
+    .card h3{margin:0 0 10px;font-size:20px}
+    .card p{margin:0;color:var(--muted)}
+
     .process{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .step{position:relative;overflow:hidden}.step::after{content:"";position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle, rgba(217,167,42,.12), transparent 70%)}
-    .step-num{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;font-weight:900;margin-bottom:14px}
+    .step{position:relative;overflow:hidden}
+    .step::after{content:"";position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%)}
+    .step-num{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,var(--silver),#fff);color:#111;font-weight:900;margin-bottom:14px}
+
     .about,.contact{display:grid;grid-template-columns:1fr 1fr;gap:22px}
     .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
     .stat{border-radius:16px;padding:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
-    .stat strong{display:block;font-size:28px;margin-bottom:4px;color:var(--gold2)}
+    .stat strong{display:block;font-size:28px;margin-bottom:4px;color:var(--silver)}
+
     .contact-list{display:grid;gap:12px;margin-top:18px}
     .contact-item{display:flex;gap:12px;align-items:flex-start;padding:15px 16px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
     .contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
     .form{display:grid;gap:14px}
-    .input,textarea{width:100%;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:var(--text);outline:none;font:inherit}
-    .input:focus,textarea:focus{border-color:rgba(240,203,114,.38);box-shadow:0 0 0 3px rgba(240,203,114,.08)}
-    textarea{resize:vertical;min-height:140px}.file-note{color:var(--muted);font-size:14px;margin-top:-2px}
+    .input,textarea,select{width:100%;padding:14px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);color:var(--text);outline:none;font:inherit}
+    .input:focus,textarea:focus,select:focus{border-color:rgba(215,221,229,.35);box-shadow:0 0 0 3px rgba(215,221,229,.08)}
+    textarea{resize:vertical;min-height:140px}
+    .file-note{color:var(--muted);font-size:14px;margin-top:-2px}
+
     .footer{padding:28px 0 56px;color:var(--muted);font-size:14px}
     .footer-box{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     .floating-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:62px;height:62px;border-radius:999px;display:grid;place-items:center;color:#08120c;background:linear-gradient(135deg,var(--green2),var(--green));box-shadow:0 18px 35px rgba(37,211,102,.28);font-size:28px}
-    @media (max-width:980px){.hero-grid,.grid-3,.process,.about,.seo,.contact{grid-template-columns:1fr}.visual-panel{min-height:500px}}
-    @media (max-width:760px){.menu{display:none}.hero{padding-top:44px}.nav-inner{min-height:66px}.badge-row{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr}.machine-screen{width:calc(100% - 56px);height:144px}.arm{right:20px;top:246px;transform:scale(.9)}.workpiece{left:22px;right:22px;bottom:92px}}
+
+    @media (max-width:1080px){
+      .hero-grid,.grid-3,.process,.about,.seo,.contact,.audience-grid{grid-template-columns:1fr}
+      .visual-panel{min-height:560px}
+    }
+    @media (max-width:860px){
+      .nav-inner{min-height:74px;align-items:flex-start;padding:12px 0}
+      .nav-right{flex-direction:column;align-items:flex-end;gap:10px}
+      .menu{display:none}
+    }
+    @media (max-width:760px){
+      .hero{padding-top:42px}
+      .brand-logo{width:58px;height:42px}
+      .brand-text strong{font-size:16px}
+      .machine-screen{width:calc(100% - 56px);height:144px}
+      .arm{right:20px;top:246px;transform:scale(.9)}
+      .workpiece{left:22px;right:22px;bottom:92px}
+      .badge-row,.stat-grid{grid-template-columns:1fr}
+      .hero-logo-box{top:18px;left:18px;right:18px}
+      .machine-area{left:18px;right:18px;bottom:18px;top:158px}
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -95,8 +350,8 @@
     "url":"https://magiccodecnc.hr/",
     "email":"info@magiccodecnc.hr",
     "telephone":"+385911670721",
-    "areaServed":"Hrvatska",
-    "description":"CNC programiranje, optimizacija obrade, visokotočne pozicije i tehnička podrška za preciznu proizvodnju.",
+    "areaServed":"Croatia",
+    "description":"CNC programming, machining optimization, precision setup positions and technical support for manufacturing.",
     "sameAs":["https://wa.me/385911670721"]
   }
   </script>
@@ -104,41 +359,58 @@
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top"><span class="logo">MC</span><span>Magic Code CNC</span></a>
-      <div class="menu">
-        <a href="#usluge">Usluge</a>
-        <a href="#proces">Proces</a>
-        <a href="#seo">Zašto baš mi</a>
-        <a href="#kontakt">Kontakt</a>
+      <a class="brand" href="#top">
+        <img class="brand-logo" src="logo.png" alt="Magic Code CNC logo" />
+        <div class="brand-text">
+          <strong>Magic Code CNC</strong>
+          <span data-i18n="brand_tag">Precision programming</span>
+        </div>
+      </a>
+
+      <div class="nav-right">
+        <div class="menu">
+          <a href="#usluge" data-i18n="nav_services">Usluge</a>
+          <a href="#proces" data-i18n="nav_process">Proces</a>
+          <a href="#prednosti" data-i18n="nav_advantages">Prednosti</a>
+          <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn active" data-lang="hr">HR</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+          </div>
+          <a class="btn" href="#kontakt" data-i18n="nav_quote">Zatraži ponudu</a>
+        </div>
       </div>
-      <a class="btn" href="#kontakt">Zatraži ponudu</a>
     </div>
   </nav>
 
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">CNC programiranje • Hrvatska</div>
-        <h1>CNC programiranje i optimizacija obrade za preciznu proizvodnju.</h1>
-        <p class="lead">
-          Magic Code CNC pruža CNC programiranje, optimizaciju CNC obrade, izradu visokotočnih pozicija
-          i tehničku podršku za radionice i proizvodnju koje traže preciznost, ponovljivost i bolju učinkovitost.
+        <div class="eyebrow" data-i18n="eyebrow">CNC programiranje • Hrvatska</div>
+        <h1 data-i18n="hero_title">CNC programiranje i optimizacija obrade za preciznu proizvodnju.</h1>
+        <p class="lead" data-i18n="hero_lead">
+          Magic Code CNC pruža CNC programiranje, optimizaciju CNC obrade, izradu visokotočnih pozicija i tehničku podršku za radionice i proizvodnju koje traže preciznost, ponovljivost i bolju učinkovitost.
         </p>
         <div class="hero-actions">
-          <a class="btn" href="#kontakt">Pošalji upit</a>
-          <a class="btn-outline" href="#usluge">Pogledaj usluge</a>
-          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="#kontakt" data-i18n="hero_cta_1">Pošalji upit</a>
+          <a class="btn-outline" href="#usluge" data-i18n="hero_cta_2">Pogledaj usluge</a>
+          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener" data-i18n="hero_cta_3">WhatsApp</a>
         </div>
         <div class="hero-points">
-          <span>CNC programer Hrvatska</span>
-          <span>Optimizacija vremena ciklusa</span>
-          <span>Precizna i stabilna obrada</span>
+          <span data-i18n="hero_point_1">CNC programer Hrvatska</span>
+          <span data-i18n="hero_point_2">Optimizacija vremena ciklusa</span>
+          <span data-i18n="hero_point_3">Precizna i stabilna obrada</span>
         </div>
       </div>
 
       <div class="visual-panel" aria-hidden="true">
-        <div class="machine-glow"></div>
-        <div class="machine">
+        <div class="hero-logo-box">
+          <img class="hero-logo" src="logo.png" alt="Magic Code CNC" />
+        </div>
+        <div class="machine-area">
           <div class="machine-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <div class="machine-screen">
             <div class="screen-line mid"></div>
@@ -151,11 +423,11 @@
           </div>
           <div class="arm"><div class="arm-head"></div><div class="arm-body"></div><div class="arm-tool"></div></div>
           <div class="workpiece"></div>
-        </div>
-        <div class="badge-row">
-          <div class="mini"><small>Fokus</small><strong>CNC programiranje</strong></div>
-          <div class="mini"><small>Rezultat</small><strong>Manje grešaka i zastoja</strong></div>
-          <div class="mini"><small>Prednost</small><strong>Brža i sigurnija obrada</strong></div>
+          <div class="badge-row">
+            <div class="mini"><small data-i18n="mini_focus">Fokus</small><strong data-i18n="mini_focus_value">CNC programiranje</strong></div>
+            <div class="mini"><small data-i18n="mini_result">Rezultat</small><strong data-i18n="mini_result_value">Manje grešaka i zastoja</strong></div>
+            <div class="mini"><small data-i18n="mini_advantage">Prednost</small><strong data-i18n="mini_advantage_value">Brža i sigurnija obrada</strong></div>
+          </div>
         </div>
       </div>
     </div>
@@ -164,24 +436,24 @@
   <section id="usluge">
     <div class="wrap">
       <div class="section-head">
-        <h2>CNC usluge</h2>
-        <p>Nudimo CNC programiranje, optimizaciju CNC obrade i pripremu visokotočnih pozicija za proizvodnju, obradu metala, precizne komponente, prototipe i serijske komade.</p>
+        <h2 data-i18n="services_title">CNC usluge</h2>
+        <p data-i18n="services_lead">Nudimo CNC programiranje, optimizaciju CNC obrade i pripremu visokotočnih pozicija za proizvodnju, obradu metala, precizne komponente, prototipe i serijske komade.</p>
       </div>
       <div class="grid-3">
         <article class="card">
           <div class="icon">⚙️</div>
-          <h3>CNC programiranje</h3>
-          <p>Izrada novih programa za pojedinačne komade, male serije i stabilnu serijsku proizvodnju s fokusom na sigurnost i ponovljivost procesa.</p>
+          <h3 data-i18n="service_1_title">CNC programiranje</h3>
+          <p data-i18n="service_1_text">Izrada novih programa za pojedinačne komade, male serije i stabilnu serijsku proizvodnju s fokusom na sigurnost i ponovljivost procesa.</p>
         </article>
         <article class="card">
           <div class="icon">📐</div>
-          <h3>Visokotočne pozicije</h3>
-          <p>Precizno definiranje nultih točaka, referenci i logike obrade za pouzdan rezultat, kontrolu tolerancija i mirniji rad na stroju.</p>
+          <h3 data-i18n="service_2_title">Visokotočne pozicije</h3>
+          <p data-i18n="service_2_text">Precizno definiranje nultih točaka, referenci i logike obrade za pouzdan rezultat, kontrolu tolerancija i mirniji rad na stroju.</p>
         </article>
         <article class="card">
           <div class="icon">🚀</div>
-          <h3>Optimizacija CNC obrade</h3>
-          <p>Analiza postojećeg procesa, smanjenje vremena ciklusa, poboljšanje putanja alata i uklanjanje uskih grla u obradi.</p>
+          <h3 data-i18n="service_3_title">Optimizacija CNC obrade</h3>
+          <p data-i18n="service_3_text">Analiza postojećeg procesa, smanjenje vremena ciklusa, poboljšanje putanja alata i uklanjanje uskih grla u obradi.</p>
         </article>
       </div>
     </div>
@@ -190,34 +462,48 @@
   <section id="proces">
     <div class="wrap">
       <div class="section-head">
-        <h2>Kako izgleda suradnja</h2>
-        <p>Jasan proces od tehničkog zahtjeva do gotovog CNC programa spremnog za proizvodnju i daljnje dorade po potrebi.</p>
+        <h2 data-i18n="process_title">Kako izgleda suradnja</h2>
+        <p data-i18n="process_lead">Jasan proces od tehničkog zahtjeva do gotovog CNC programa spremnog za proizvodnju i daljnje dorade po potrebi.</p>
       </div>
       <div class="process">
-        <article class="card step"><div class="step-num">1</div><h3>Analiza nacrta</h3><p>Pregled nacrta, materijala, tolerancija, količine i očekivanog načina obrade.</p></article>
-        <article class="card step"><div class="step-num">2</div><h3>Priprema programa</h3><p>Definiranje strategije obrade, redoslijeda operacija, izbora alata i ključnih kontrolnih točaka.</p></article>
-        <article class="card step"><div class="step-num">3</div><h3>Optimizacija</h3><p>Provjera preciznosti, sigurnosti, stabilnosti i učinkovitosti prije puštanja u rad.</p></article>
-        <article class="card step"><div class="step-num">4</div><h3>Podrška</h3><p>Dodatne dorade i prilagodbe stvarnim uvjetima rada u proizvodnji ili na stroju.</p></article>
+        <article class="card step"><div class="step-num">1</div><h3 data-i18n="step_1_title">Analiza nacrta</h3><p data-i18n="step_1_text">Pregled nacrta, materijala, tolerancija, količine i očekivanog načina obrade.</p></article>
+        <article class="card step"><div class="step-num">2</div><h3 data-i18n="step_2_title">Priprema programa</h3><p data-i18n="step_2_text">Definiranje strategije obrade, redoslijeda operacija, izbora alata i ključnih kontrolnih točaka.</p></article>
+        <article class="card step"><div class="step-num">3</div><h3 data-i18n="step_3_title">Optimizacija</h3><p data-i18n="step_3_text">Provjera preciznosti, sigurnosti, stabilnosti i učinkovitosti prije puštanja u rad.</p></article>
+        <article class="card step"><div class="step-num">4</div><h3 data-i18n="step_4_title">Podrška</h3><p data-i18n="step_4_text">Dodatne dorade i prilagodbe stvarnim uvjetima rada u proizvodnji ili na stroju.</p></article>
       </div>
     </div>
   </section>
 
-  <section id="onama">
+  <section id="prednosti">
     <div class="wrap about">
       <div class="card">
         <div class="section-head" style="margin-bottom:0">
-          <h2>Magic Code CNC</h2>
-          <p>Magic Code CNC specijaliziran je za CNC programiranje, optimizaciju obrade i izradu visokotočnih pozicija. Fokus je na praktičnim rješenjima koja donose stabilniju proizvodnju, manje zastoja i bolju kontrolu kvalitete.</p>
+          <h2 data-i18n="about_title">Magic Code CNC</h2>
+          <p data-i18n="about_text">Magic Code CNC specijaliziran je za CNC programiranje, optimizaciju obrade i izradu visokotočnih pozicija. Fokus je na praktičnim rješenjima koja donose stabilniju proizvodnju, manje zastoja i bolju kontrolu kvalitete.</p>
         </div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Zašto klijenti traže baš ovo</h3>
+        <h3 style="margin-top:0" data-i18n="why_title">Zašto nas klijenti biraju</h3>
         <div class="stat-grid">
-          <div class="stat"><strong>Preciznost</strong><span>Tolerancije i detalji bez improvizacije.</span></div>
-          <div class="stat"><strong>Pouzdanost</strong><span>Jasna logika obrade i bolja ponovljivost.</span></div>
-          <div class="stat"><strong>Učinkovitost</strong><span>Kraće vrijeme pripreme i bolji tok proizvodnje.</span></div>
-          <div class="stat"><strong>Podrška</strong><span>Dorade prema stvarnim uvjetima rada.</span></div>
+          <div class="stat"><strong data-i18n="stat_1_title">Preciznost</strong><span data-i18n="stat_1_text">Tolerancije i detalji bez improvizacije.</span></div>
+          <div class="stat"><strong data-i18n="stat_2_title">Pouzdanost</strong><span data-i18n="stat_2_text">Jasna logika obrade i bolja ponovljivost.</span></div>
+          <div class="stat"><strong data-i18n="stat_3_title">Učinkovitost</strong><span data-i18n="stat_3_text">Kraće vrijeme pripreme i bolji tok proizvodnje.</span></div>
+          <div class="stat"><strong data-i18n="stat_4_title">Podrška</strong><span data-i18n="stat_4_text">Dorade prema stvarnim uvjetima rada.</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="audience_title">Za koga radimo</h2>
+        <p data-i18n="audience_lead">Suradnja je prilagođena radionicama, proizvodnim pogonima i tehničkim timovima koji trebaju siguran, čist i učinkovit CNC proces.</p>
+      </div>
+      <div class="audience-grid">
+        <article class="card"><h3 data-i18n="audience_1_title">Proizvodnja i serije</h3><p data-i18n="audience_1_text">Za tvrtke koje trebaju ponovljivost, manje zastoja i stabilniji proizvodni tok.</p></article>
+        <article class="card"><h3 data-i18n="audience_2_title">Alatnice i obrada metala</h3><p data-i18n="audience_2_text">Za zahtjevne komade, precizne tolerancije i tehničku podršku kod pripreme obrade.</p></article>
+        <article class="card"><h3 data-i18n="audience_3_title">Prototipi i posebni projekti</h3><p data-i18n="audience_3_text">Za pojedinačne komade, razvoj proizvoda i prilagodbe prema stvarnim uvjetima stroja.</p></article>
       </div>
     </div>
   </section>
@@ -225,13 +511,13 @@
   <section id="seo">
     <div class="wrap">
       <div class="section-head">
-        <h2>Za koga je ova usluga</h2>
-        <p>Ovaj sadržaj je namjerno napisan jasno i konkretno kako bi Google razumio da se stranica odnosi na CNC programiranje, CNC obradu, optimizaciju obrade i tehničku podršku za proizvodnju u Hrvatskoj.</p>
+        <h2 data-i18n="seo_title">Vrste usluga i područje rada</h2>
+        <p data-i18n="seo_lead">Stranica je strukturirana jasno i profesionalno kako bi kupci i tražilice odmah razumjeli da se radi o CNC programiranju, optimizaciji obrade i tehničkoj podršci za preciznu proizvodnju.</p>
       </div>
       <div class="seo">
-        <article class="card"><h3>CNC programiranje za proizvodnju</h3><p>Ako tražiš CNC programiranje za obradu metala, precizne dijelove, prototipe ili serijsku proizvodnju, Magic Code CNC nudi praktična rješenja prilagođena stvarnoj radionici i stvarnim rokovima.</p></article>
-        <article class="card"><h3>Optimizacija CNC obrade</h3><p>Kada postojeći program radi presporo, nestabilno ili stvara nepotrebne zastoje, optimizacija CNC obrade može donijeti kraće cikluse, mirniji rad i bolju iskoristivost stroja.</p></article>
-        <article class="card"><h3>CNC programer Hrvatska</h3><p>Za upite poput “CNC programer Hrvatska”, “CNC obrada Hrvatska” ili “optimizacija CNC obrade”, stranica je strukturirana da jasno pokaže područje rada, usluge i način kontakta.</p></article>
+        <article class="card"><h3 data-i18n="seo_1_title">CNC programiranje za proizvodnju</h3><p data-i18n="seo_1_text">Izrada programa za obradu metala, precizne dijelove, prototipe i serijsku proizvodnju s fokusom na stabilnost procesa.</p></article>
+        <article class="card"><h3 data-i18n="seo_2_title">Optimizacija CNC obrade</h3><p data-i18n="seo_2_text">Kada postojeći program radi presporo ili nestabilno, optimizacija smanjuje cikluse i poboljšava iskorištenje stroja.</p></article>
+        <article class="card"><h3 data-i18n="seo_3_title">CNC partner za Hrvatsku i inozemstvo</h3><p data-i18n="seo_3_text">Suradnja za domaće i strane klijente kojima je važna preciznost, tehnička komunikacija i pouzdana priprema obrade.</p></article>
       </div>
     </div>
   </section>
@@ -240,30 +526,30 @@
     <div class="wrap contact">
       <div class="card">
         <div class="section-head" style="margin-bottom:0">
-          <h2>Kontakt</h2>
-          <p>Pošalji osnovne informacije o projektu i javljamo se s prijedlogom rješenja.</p>
+          <h2 data-i18n="contact_title">Kontakt</h2>
+          <p data-i18n="contact_lead">Pošalji osnovne informacije o projektu i javljamo se s prijedlogom rješenja.</p>
         </div>
         <div class="contact-list">
-          <div class="contact-item"><div>📧</div><div><strong>Email</strong><br><a href="mailto:info@magiccodecnc.hr">info@magiccodecnc.hr</a></div></div>
+          <div class="contact-item"><div>📧</div><div><strong data-i18n="contact_email">Email</strong><br><a href="mailto:info@magiccodecnc.hr">info@magiccodecnc.hr</a></div></div>
           <div class="contact-item"><div>📱</div><div><strong>WhatsApp</strong><br><a href="https://wa.me/385911670721" target="_blank" rel="noopener">+385 91 167 0721</a></div></div>
-          <div class="contact-item"><div>📍</div><div><strong>Područje rada</strong><br>Hrvatska</div></div>
+          <div class="contact-item"><div>📍</div><div><strong data-i18n="contact_area">Područje rada</strong><br><span data-i18n="contact_area_value">Hrvatska i inozemstvo</span></div></div>
         </div>
         <div class="contact-actions">
-          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener">WhatsApp kontakt</a>
-          <a class="btn-outline" href="mailto:info@magiccodecnc.hr">Pošalji email</a>
+          <a class="btn-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener" data-i18n="contact_btn_wa">WhatsApp kontakt</a>
+          <a class="btn-outline" href="mailto:info@magiccodecnc.hr" data-i18n="contact_btn_mail">Pošalji email</a>
         </div>
       </div>
 
       <div class="card">
-        <h3 style="margin-top:0">Pošalji upit</h3>
+        <h3 style="margin-top:0" data-i18n="form_title">Pošalji upit</h3>
         <form class="form" id="contactForm">
           <input class="input" id="name" type="text" placeholder="Ime i prezime / tvrtka" required />
           <input class="input" id="email" type="email" placeholder="Email" required />
           <input class="input" id="project" type="text" placeholder="Vrsta projekta" />
           <textarea id="message" placeholder="Kratko opiši što trebaš: materijal, tolerancije, količina, rok..." required></textarea>
           <input class="input" id="attachment" type="file" />
-          <div class="file-note">Nakon klika na gumb otvorit će se email s popunjenim podacima. Datoteku treba ručno priložiti u svom email programu.</div>
-          <button class="btn" type="submit">Otvori email za slanje upita</button>
+          <div class="file-note" data-i18n="form_note">Nakon klika na gumb otvorit će se email s popunjenim podacima. Datoteku treba ručno priložiti u svom email programu.</div>
+          <button class="btn" type="submit" data-i18n="form_btn">Otvori email za slanje upita</button>
         </form>
       </div>
     </div>
@@ -271,33 +557,225 @@
 
   <footer class="footer">
     <div class="wrap footer-box">
-      <div>© 2026 Magic Code CNC. Sva prava pridržana.</div>
-      <div>CNC programiranje • CNC obrada • Optimizacija proizvodnje</div>
+      <div data-i18n="footer_left">© 2026 Magic Code CNC. Sva prava pridržana.</div>
+      <div data-i18n="footer_right">CNC programiranje • CNC obrada • Optimizacija proizvodnje</div>
     </div>
   </footer>
 
   <a class="floating-wa" href="https://wa.me/385911670721?text=Pozdrav,%20zanima%20me%20ponuda%20za%20CNC%20usluge." target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
 
   <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e){
+    const translations = {
+      hr: {
+        brand_tag: 'Precision programming',
+        nav_services: 'Usluge', nav_process: 'Proces', nav_advantages: 'Prednosti', nav_contact: 'Kontakt', nav_quote: 'Zatraži ponudu',
+        eyebrow: 'CNC programiranje • Hrvatska',
+        hero_title: 'CNC programiranje i optimizacija obrade za preciznu proizvodnju.',
+        hero_lead: 'Magic Code CNC pruža CNC programiranje, optimizaciju CNC obrade, izradu visokotočnih pozicija i tehničku podršku za radionice i proizvodnju koje traže preciznost, ponovljivost i bolju učinkovitost.',
+        hero_cta_1: 'Pošalji upit', hero_cta_2: 'Pogledaj usluge', hero_cta_3: 'WhatsApp',
+        hero_point_1: 'CNC programer Hrvatska', hero_point_2: 'Optimizacija vremena ciklusa', hero_point_3: 'Precizna i stabilna obrada',
+        mini_focus: 'Fokus', mini_focus_value: 'CNC programiranje', mini_result: 'Rezultat', mini_result_value: 'Manje grešaka i zastoja', mini_advantage: 'Prednost', mini_advantage_value: 'Brža i sigurnija obrada',
+        services_title: 'CNC usluge',
+        services_lead: 'Nudimo CNC programiranje, optimizaciju CNC obrade i pripremu visokotočnih pozicija za proizvodnju, obradu metala, precizne komponente, prototipe i serijske komade.',
+        service_1_title: 'CNC programiranje', service_1_text: 'Izrada novih programa za pojedinačne komade, male serije i stabilnu serijsku proizvodnju s fokusom na sigurnost i ponovljivost procesa.',
+        service_2_title: 'Visokotočne pozicije', service_2_text: 'Precizno definiranje nultih točaka, referenci i logike obrade za pouzdan rezultat, kontrolu tolerancija i mirniji rad na stroju.',
+        service_3_title: 'Optimizacija CNC obrade', service_3_text: 'Analiza postojećeg procesa, smanjenje vremena ciklusa, poboljšanje putanja alata i uklanjanje uskih grla u obradi.',
+        process_title: 'Kako izgleda suradnja', process_lead: 'Jasan proces od tehničkog zahtjeva do gotovog CNC programa spremnog za proizvodnju i daljnje dorade po potrebi.',
+        step_1_title: 'Analiza nacrta', step_1_text: 'Pregled nacrta, materijala, tolerancija, količine i očekivanog načina obrade.',
+        step_2_title: 'Priprema programa', step_2_text: 'Definiranje strategije obrade, redoslijeda operacija, izbora alata i ključnih kontrolnih točaka.',
+        step_3_title: 'Optimizacija', step_3_text: 'Provjera preciznosti, sigurnosti, stabilnosti i učinkovitosti prije puštanja u rad.',
+        step_4_title: 'Podrška', step_4_text: 'Dodatne dorade i prilagodbe stvarnim uvjetima rada u proizvodnji ili na stroju.',
+        about_title: 'Magic Code CNC',
+        about_text: 'Magic Code CNC specijaliziran je za CNC programiranje, optimizaciju obrade i izradu visokotočnih pozicija. Fokus je na praktičnim rješenjima koja donose stabilniju proizvodnju, manje zastoja i bolju kontrolu kvalitete.',
+        why_title: 'Zašto nas klijenti biraju',
+        stat_1_title: 'Preciznost', stat_1_text: 'Tolerancije i detalji bez improvizacije.',
+        stat_2_title: 'Pouzdanost', stat_2_text: 'Jasna logika obrade i bolja ponovljivost.',
+        stat_3_title: 'Učinkovitost', stat_3_text: 'Kraće vrijeme pripreme i bolji tok proizvodnje.',
+        stat_4_title: 'Podrška', stat_4_text: 'Dorade prema stvarnim uvjetima rada.',
+        audience_title: 'Za koga radimo', audience_lead: 'Suradnja je prilagođena radionicama, proizvodnim pogonima i tehničkim timovima koji trebaju siguran, čist i učinkovit CNC proces.',
+        audience_1_title: 'Proizvodnja i serije', audience_1_text: 'Za tvrtke koje trebaju ponovljivost, manje zastoja i stabilniji proizvodni tok.',
+        audience_2_title: 'Alatnice i obrada metala', audience_2_text: 'Za zahtjevne komade, precizne tolerancije i tehničku podršku kod pripreme obrade.',
+        audience_3_title: 'Prototipi i posebni projekti', audience_3_text: 'Za pojedinačne komade, razvoj proizvoda i prilagodbe prema stvarnim uvjetima stroja.',
+        seo_title: 'Vrste usluga i područje rada', seo_lead: 'Stranica je strukturirana jasno i profesionalno kako bi kupci i tražilice odmah razumjeli da se radi o CNC programiranju, optimizaciji obrade i tehničkoj podršci za preciznu proizvodnju.',
+        seo_1_title: 'CNC programiranje za proizvodnju', seo_1_text: 'Izrada programa za obradu metala, precizne dijelove, prototipe i serijsku proizvodnju s fokusom na stabilnost procesa.',
+        seo_2_title: 'Optimizacija CNC obrade', seo_2_text: 'Kada postojeći program radi presporo ili nestabilno, optimizacija smanjuje cikluse i poboljšava iskorištenje stroja.',
+        seo_3_title: 'CNC partner za Hrvatsku i inozemstvo', seo_3_text: 'Suradnja za domaće i strane klijente kojima je važna preciznost, tehnička komunikacija i pouzdana priprema obrade.',
+        contact_title: 'Kontakt', contact_lead: 'Pošalji osnovne informacije o projektu i javljamo se s prijedlogom rješenja.', contact_email: 'Email', contact_area: 'Područje rada', contact_area_value: 'Hrvatska i inozemstvo', contact_btn_wa: 'WhatsApp kontakt', contact_btn_mail: 'Pošalji email',
+        form_title: 'Pošalji upit', form_note: 'Nakon klika na gumb otvorit će se email s popunjenim podacima. Datoteku treba ručno priložiti u svom email programu.', form_btn: 'Otvori email za slanje upita',
+        footer_left: '© 2026 Magic Code CNC. Sva prava pridržana.', footer_right: 'CNC programiranje • CNC obrada • Optimizacija proizvodnje',
+        placeholder_name: 'Ime i prezime / tvrtka', placeholder_email: 'Email', placeholder_project: 'Vrsta projekta', placeholder_message: 'Kratko opiši što trebaš: materijal, tolerancije, količina, rok...',
+        mail_subject: 'Upit preko web stranice - ', mail_default_project: 'CNC usluge',
+        mail_name: 'Ime / tvrtka', mail_email: 'Email', mail_project: 'Projekt', mail_description: 'Opis upita', mail_attachment: 'Odabrana datoteka', mail_attachment_note: 'Napomena: datoteku je potrebno ručno priložiti u email programu nakon otvaranja poruke.', mail_no_attachment: 'Nema priloga'
+      },
+      en: {
+        brand_tag: 'Precision programming',
+        nav_services: 'Services', nav_process: 'Process', nav_advantages: 'Advantages', nav_contact: 'Contact', nav_quote: 'Request a quote',
+        eyebrow: 'CNC programming • Croatia',
+        hero_title: 'CNC programming and machining optimization for precision manufacturing.',
+        hero_lead: 'Magic Code CNC provides CNC programming, machining optimization, precision setup positions and technical support for workshops and manufacturers that require accuracy, repeatability and better efficiency.',
+        hero_cta_1: 'Send inquiry', hero_cta_2: 'View services', hero_cta_3: 'WhatsApp',
+        hero_point_1: 'CNC programmer Croatia', hero_point_2: 'Cycle time optimization', hero_point_3: 'Precise and stable machining',
+        mini_focus: 'Focus', mini_focus_value: 'CNC programming', mini_result: 'Result', mini_result_value: 'Fewer errors and downtime', mini_advantage: 'Advantage', mini_advantage_value: 'Faster and safer machining',
+        services_title: 'CNC services',
+        services_lead: 'We provide CNC programming, machining optimization and precision setup preparation for manufacturing, metalworking, precision parts, prototypes and production series.',
+        service_1_title: 'CNC programming', service_1_text: 'Development of new programs for single parts, small batches and stable serial production with a strong focus on process safety and repeatability.',
+        service_2_title: 'Precision setup positions', service_2_text: 'Accurate definition of zero points, references and machining logic for reliable results, tolerance control and smoother machine operation.',
+        service_3_title: 'Machining optimization', service_3_text: 'Analysis of the existing process, reduction of cycle time, better toolpaths and removal of bottlenecks in machining.',
+        process_title: 'How cooperation works', process_lead: 'A clear process from technical request to a finished CNC program ready for production, including follow-up adjustments when needed.',
+        step_1_title: 'Drawing analysis', step_1_text: 'Review of drawings, material, tolerances, quantities and the expected machining approach.',
+        step_2_title: 'Program preparation', step_2_text: 'Definition of machining strategy, operation sequence, tool selection and key control points.',
+        step_3_title: 'Optimization', step_3_text: 'Verification of accuracy, safety, stability and efficiency before production release.',
+        step_4_title: 'Support', step_4_text: 'Additional adjustments tailored to real production and machine conditions.',
+        about_title: 'Magic Code CNC',
+        about_text: 'Magic Code CNC specializes in CNC programming, machining optimization and precision setup positions. The focus is on practical solutions that bring more stable production, less downtime and better quality control.',
+        why_title: 'Why clients choose us',
+        stat_1_title: 'Precision', stat_1_text: 'Tolerances and details without improvisation.',
+        stat_2_title: 'Reliability', stat_2_text: 'Clear machining logic and better repeatability.',
+        stat_3_title: 'Efficiency', stat_3_text: 'Less preparation time and a better production flow.',
+        stat_4_title: 'Support', stat_4_text: 'Adjustments based on real working conditions.',
+        audience_title: 'Who we work for', audience_lead: 'The cooperation model is tailored to workshops, production plants and technical teams that need a safe, clean and efficient CNC process.',
+        audience_1_title: 'Manufacturing and serial production', audience_1_text: 'For companies that need repeatability, less downtime and a more stable production flow.',
+        audience_2_title: 'Tool shops and metalworking', audience_2_text: 'For demanding parts, precision tolerances and technical support during machining preparation.',
+        audience_3_title: 'Prototypes and special projects', audience_3_text: 'For single parts, product development and adjustments to real machine conditions.',
+        seo_title: 'Service scope and work area', seo_lead: 'The website is structured clearly and professionally so both clients and search engines immediately understand the focus on CNC programming, machining optimization and technical support for precision manufacturing.',
+        seo_1_title: 'CNC programming for production', seo_1_text: 'Programming for metalworking, precision components, prototypes and serial production with process stability in mind.',
+        seo_2_title: 'CNC machining optimization', seo_2_text: 'When an existing program is too slow or unstable, optimization reduces cycle time and improves machine utilization.',
+        seo_3_title: 'CNC partner for Croatia and international clients', seo_3_text: 'Cooperation for local and foreign clients who value precision, technical communication and reliable machining preparation.',
+        contact_title: 'Contact', contact_lead: 'Send the basic information about your project and we will reply with a proposed solution.', contact_email: 'Email', contact_area: 'Work area', contact_area_value: 'Croatia and international', contact_btn_wa: 'WhatsApp contact', contact_btn_mail: 'Send email',
+        form_title: 'Send inquiry', form_note: 'After clicking the button, your email app will open with prefilled data. The file must be attached manually in your email program.', form_btn: 'Open email inquiry',
+        footer_left: '© 2026 Magic Code CNC. All rights reserved.', footer_right: 'CNC programming • CNC machining • Production optimization',
+        placeholder_name: 'Full name / company', placeholder_email: 'Email', placeholder_project: 'Project type', placeholder_message: 'Briefly describe what you need: material, tolerances, quantity, deadline...',
+        mail_subject: 'Website inquiry - ', mail_default_project: 'CNC services',
+        mail_name: 'Name / company', mail_email: 'Email', mail_project: 'Project', mail_description: 'Inquiry description', mail_attachment: 'Selected file', mail_attachment_note: 'Note: the file needs to be attached manually in your email program after the message opens.', mail_no_attachment: 'No attachment'
+      },
+      de: {
+        brand_tag: 'Präzisionsprogrammierung',
+        nav_services: 'Leistungen', nav_process: 'Prozess', nav_advantages: 'Vorteile', nav_contact: 'Kontakt', nav_quote: 'Angebot anfragen',
+        eyebrow: 'CNC-Programmierung • Kroatien',
+        hero_title: 'CNC-Programmierung und Bearbeitungsoptimierung für präzise Fertigung.',
+        hero_lead: 'Magic Code CNC bietet CNC-Programmierung, Optimierung der Bearbeitung, hochpräzise Referenzpositionen und technische Unterstützung für Werkstätten und Hersteller, die Genauigkeit, Wiederholbarkeit und höhere Effizienz benötigen.',
+        hero_cta_1: 'Anfrage senden', hero_cta_2: 'Leistungen ansehen', hero_cta_3: 'WhatsApp',
+        hero_point_1: 'CNC-Programmierer Kroatien', hero_point_2: 'Optimierung der Zykluszeit', hero_point_3: 'Präzise und stabile Bearbeitung',
+        mini_focus: 'Fokus', mini_focus_value: 'CNC-Programmierung', mini_result: 'Ergebnis', mini_result_value: 'Weniger Fehler und Stillstände', mini_advantage: 'Vorteil', mini_advantage_value: 'Schnellere und sicherere Bearbeitung',
+        services_title: 'CNC-Leistungen',
+        services_lead: 'Wir bieten CNC-Programmierung, Bearbeitungsoptimierung und Vorbereitung hochpräziser Positionen für Fertigung, Metallbearbeitung, Präzisionsteile, Prototypen und Serienproduktion.',
+        service_1_title: 'CNC-Programmierung', service_1_text: 'Erstellung neuer Programme für Einzelteile, Kleinserien und stabile Serienfertigung mit Fokus auf Prozesssicherheit und Wiederholbarkeit.',
+        service_2_title: 'Hochpräzise Positionen', service_2_text: 'Präzise Definition von Nullpunkten, Referenzen und Bearbeitungslogik für zuverlässige Ergebnisse, Toleranzkontrolle und ruhigeren Maschinenlauf.',
+        service_3_title: 'Bearbeitungsoptimierung', service_3_text: 'Analyse des bestehenden Prozesses, Reduzierung der Zykluszeit, bessere Werkzeugbahnen und Beseitigung von Engpässen in der Bearbeitung.',
+        process_title: 'So läuft die Zusammenarbeit ab', process_lead: 'Ein klarer Prozess vom technischen Auftrag bis zum fertigen CNC-Programm für die Produktion, inklusive weiterer Anpassungen bei Bedarf.',
+        step_1_title: 'Zeichnungsanalyse', step_1_text: 'Prüfung von Zeichnungen, Material, Toleranzen, Stückzahl und erwarteter Bearbeitungsmethode.',
+        step_2_title: 'Programmerstellung', step_2_text: 'Festlegung der Bearbeitungsstrategie, Reihenfolge der Operationen, Werkzeugauswahl und wichtiger Kontrollpunkte.',
+        step_3_title: 'Optimierung', step_3_text: 'Prüfung von Genauigkeit, Sicherheit, Stabilität und Effizienz vor der Freigabe.',
+        step_4_title: 'Support', step_4_text: 'Zusätzliche Anpassungen an reale Bedingungen in Produktion und Maschine.',
+        about_title: 'Magic Code CNC',
+        about_text: 'Magic Code CNC ist auf CNC-Programmierung, Bearbeitungsoptimierung und hochpräzise Positionen spezialisiert. Im Fokus stehen praxisnahe Lösungen für stabilere Produktion, weniger Stillstände und bessere Qualitätskontrolle.',
+        why_title: 'Warum Kunden uns wählen',
+        stat_1_title: 'Präzision', stat_1_text: 'Toleranzen und Details ohne Improvisation.',
+        stat_2_title: 'Zuverlässigkeit', stat_2_text: 'Klare Bearbeitungslogik und bessere Wiederholbarkeit.',
+        stat_3_title: 'Effizienz', stat_3_text: 'Weniger Rüstzeit und besserer Produktionsfluss.',
+        stat_4_title: 'Support', stat_4_text: 'Anpassungen an reale Arbeitsbedingungen.',
+        audience_title: 'Für wen wir arbeiten', audience_lead: 'Die Zusammenarbeit ist auf Werkstätten, Produktionsbetriebe und technische Teams zugeschnitten, die einen sicheren, sauberen und effizienten CNC-Prozess benötigen.',
+        audience_1_title: 'Fertigung und Serienproduktion', audience_1_text: 'Für Unternehmen, die Wiederholbarkeit, weniger Stillstände und einen stabileren Produktionsfluss brauchen.',
+        audience_2_title: 'Werkzeugbau und Metallbearbeitung', audience_2_text: 'Für anspruchsvolle Teile, enge Toleranzen und technische Unterstützung bei der Bearbeitungsvorbereitung.',
+        audience_3_title: 'Prototypen und Sonderprojekte', audience_3_text: 'Für Einzelteile, Produktentwicklung und Anpassungen an reale Maschinenbedingungen.',
+        seo_title: 'Leistungsspektrum und Einsatzgebiet', seo_lead: 'Die Website ist klar und professionell aufgebaut, damit Kunden und Suchmaschinen sofort erkennen, dass es um CNC-Programmierung, Bearbeitungsoptimierung und technische Unterstützung für präzise Fertigung geht.',
+        seo_1_title: 'CNC-Programmierung für die Fertigung', seo_1_text: 'Programme für Metallbearbeitung, Präzisionsteile, Prototypen und Serienfertigung mit Fokus auf Prozessstabilität.',
+        seo_2_title: 'Optimierung der CNC-Bearbeitung', seo_2_text: 'Wenn ein bestehendes Programm zu langsam oder instabil ist, reduziert die Optimierung die Zykluszeit und verbessert die Maschinenauslastung.',
+        seo_3_title: 'CNC-Partner für Kroatien und internationale Kunden', seo_3_text: 'Zusammenarbeit mit inländischen und ausländischen Kunden, denen Präzision, technische Kommunikation und zuverlässige Bearbeitungsvorbereitung wichtig sind.',
+        contact_title: 'Kontakt', contact_lead: 'Senden Sie die wichtigsten Projektinformationen und wir melden uns mit einem Lösungsvorschlag.', contact_email: 'E-Mail', contact_area: 'Einsatzgebiet', contact_area_value: 'Kroatien und international', contact_btn_wa: 'WhatsApp Kontakt', contact_btn_mail: 'E-Mail senden',
+        form_title: 'Anfrage senden', form_note: 'Nach dem Klick auf die Schaltfläche öffnet sich Ihr E-Mail-Programm mit vorausgefüllten Daten. Die Datei muss dort manuell angehängt werden.', form_btn: 'E-Mail-Anfrage öffnen',
+        footer_left: '© 2026 Magic Code CNC. Alle Rechte vorbehalten.', footer_right: 'CNC-Programmierung • CNC-Bearbeitung • Produktionsoptimierung',
+        placeholder_name: 'Name / Firma', placeholder_email: 'E-Mail', placeholder_project: 'Projektart', placeholder_message: 'Beschreiben Sie kurz Ihren Bedarf: Material, Toleranzen, Menge, Termin...',
+        mail_subject: 'Anfrage über die Website - ', mail_default_project: 'CNC-Leistungen',
+        mail_name: 'Name / Firma', mail_email: 'E-Mail', mail_project: 'Projekt', mail_description: 'Beschreibung der Anfrage', mail_attachment: 'Ausgewählte Datei', mail_attachment_note: 'Hinweis: Die Datei muss nach dem Öffnen der Nachricht manuell im E-Mail-Programm angehängt werden.', mail_no_attachment: 'Kein Anhang'
+      }
+    };
+
+    const metaByLang = {
+      hr: {
+        lang: 'hr',
+        title: 'Magic Code CNC | CNC programiranje i optimizacija obrade',
+        description: 'Magic Code CNC nudi CNC programiranje, optimizaciju obrade, visokotočne pozicije i tehničku podršku za preciznu proizvodnju u Hrvatskoj.'
+      },
+      en: {
+        lang: 'en',
+        title: 'Magic Code CNC | CNC programming and machining optimization',
+        description: 'Magic Code CNC provides CNC programming, machining optimization, precision setup positions and technical support for precision manufacturing.'
+      },
+      de: {
+        lang: 'de',
+        title: 'Magic Code CNC | CNC-Programmierung und Bearbeitungsoptimierung',
+        description: 'Magic Code CNC bietet CNC-Programmierung, Bearbeitungsoptimierung, hochpräzise Positionen und technische Unterstützung für präzise Fertigung.'
+      }
+    };
+
+    const elements = document.querySelectorAll('[data-i18n]');
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const form = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const projectInput = document.getElementById('project');
+    const messageInput = document.getElementById('message');
+    const attachmentInput = document.getElementById('attachment');
+    let currentLang = localStorage.getItem('magiccode_lang') || 'hr';
+
+    function applyPlaceholders(dict) {
+      nameInput.placeholder = dict.placeholder_name;
+      emailInput.placeholder = dict.placeholder_email;
+      projectInput.placeholder = dict.placeholder_project;
+      messageInput.placeholder = dict.placeholder_message;
+    }
+
+    function applyMeta(lang) {
+      const meta = metaByLang[lang];
+      document.documentElement.lang = meta.lang;
+      document.title = meta.title;
+      const descriptionTag = document.querySelector('meta[name="description"]');
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      const ogDescription = document.querySelector('meta[property="og:description"]');
+      descriptionTag.setAttribute('content', meta.description);
+      ogTitle.setAttribute('content', meta.title);
+      ogDescription.setAttribute('content', meta.description);
+    }
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.hr;
+      elements.forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) el.textContent = dict[key];
+      });
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      applyPlaceholders(dict);
+      applyMeta(lang);
+      currentLang = lang;
+      localStorage.setItem('magiccode_lang', lang);
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    form.addEventListener('submit', function(e){
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const project = document.getElementById('project').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const attachmentInput = document.getElementById('attachment');
-      const attachmentName = attachmentInput.files.length ? attachmentInput.files[0].name : 'Nema priloga';
-      const subject = encodeURIComponent('Upit preko web stranice - ' + (project || 'CNC usluge'));
+      const dict = translations[currentLang] || translations.hr;
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const project = projectInput.value.trim();
+      const message = messageInput.value.trim();
+      const attachmentName = attachmentInput.files.length ? attachmentInput.files[0].name : dict.mail_no_attachment;
+      const subject = encodeURIComponent(dict.mail_subject + (project || dict.mail_default_project));
       const body = encodeURIComponent(
-        'Ime / tvrtka: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Projekt: ' + (project || '-') + '\n\n' +
-        'Opis upita:\n' + message + '\n\n' +
-        'Odabrana datoteka: ' + attachmentName + '\n' +
-        'Napomena: datoteku je potrebno ručno priložiti u email programu nakon otvaranja poruke.'
+        dict.mail_name + ': ' + name + '\n' +
+        dict.mail_email + ': ' + email + '\n' +
+        dict.mail_project + ': ' + (project || '-') + '\n\n' +
+        dict.mail_description + ':\n' + message + '\n\n' +
+        dict.mail_attachment + ': ' + attachmentName + '\n' +
+        dict.mail_attachment_note
       );
       window.location.href = 'mailto:info@magiccodecnc.hr?subject=' + subject + '&body=' + body;
     });
+
+    setLanguage(currentLang);
   </script>
 </body>
 </html>
